@@ -24,6 +24,10 @@ function convert_video_agptek_m6_avi() {
         -c:v libx264 \
         -c:a pcm_s16le \
         -pix_fmt yuv420p \
+        -bufsize 25000k \
+        -maxrate 25000k \
+        -qmin 18 \
+        -qmax 43 \
         -refs 1 \
         -g 7 \
         -vb 1500000 \
