@@ -24,7 +24,7 @@ function main() {
 
     for mode in audio image text video; do
         find "$WORKING_DIR/$mode" -type f \
-            -exec bash -c 'convert_file $1 $2' _ "$mode" {} \;
+            -exec bash -c 'convert_file "$1" "$2"' _ "$mode" {} \;
     done
 }
 
