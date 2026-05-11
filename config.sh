@@ -7,6 +7,7 @@ CONVERTERS_IMAGE=(
     "convert_image_agptek_m6_jpg"
     "convert_image_agptek_m6_bmp"
     "convert_image_ruizu_x52_jpg"
+    "convert_image_ruizu_x52_bmp"
 )
 CONVERTERS_TEXT=(
     "convert_text_txt"
