@@ -13,7 +13,7 @@ function source_converters() {
 }
 
 function main() {
-    source config.sh
+    source "$SCRIPT_DIR/config.sh"
     source_converters
 
     for mode in audio image text video; do
