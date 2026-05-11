@@ -14,7 +14,7 @@ function convert_image_ruizu_x52_bmp() {
     convert \
         "$input_file" \
         -interlace none \
-        -resize 128x \
+        -resize 128x128 \
         -gravity center \
         -background black \
         -extent 128x128 \

@@ -14,7 +14,7 @@ function convert_image_agptek_m6_jpg() {
     convert \
         "$input_file" \
         -interlace none \
-        -resize 320x \
+        -resize 320x320 \
         "$output_file"
 }
 
