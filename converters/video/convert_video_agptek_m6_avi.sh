@@ -11,6 +11,7 @@ function convert_video_agptek_m6_avi() {
         return 0
     fi
 
+    local size="'if(gt(ih, iw), 240, 320)':'if(gt(ih, iw), 320, 240)'"
     wine converters/ffmpeg-mod.exe \
         -i "$input_file" \
         -n \
@@ -19,7 +20,7 @@ function convert_video_agptek_m6_avi() {
         -profile:v baseline \
         -x264-params "imax=98304:pmax=65536:ipmax=163840" \
         -f avi \
-        -vf "scale=320:240:force_original_aspect_ratio=decrease,pad=320:240:(ow-iw)/2:(oh-ih)/2:black,transpose=2" \
+        -vf "scale=$size:force_original_aspect_ratio=decrease,pad=$size:(ow-iw)/2:(oh-ih)/2:black,transpose=2:passthrough=portrait" \
         -strict -1 \
         -c:v libx264 \
         -c:a pcm_s16le \
