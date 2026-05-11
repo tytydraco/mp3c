@@ -11,7 +11,7 @@ converter if you want optimal playback for a specific device.
 
 # Usage
 
-1. Configure your config in [config.sh](config.sh).
+1. Copy the [example config](config.example.sh) to [config.sh](config.sh).
 2. Run `./main.sh`.
 
 # Docker
