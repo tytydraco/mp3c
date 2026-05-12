@@ -15,6 +15,7 @@ function convert_audio_adts_aac() {
         -i "$input_file" \
         -n \
         -c:a aac \
+        -b:a 256k \
         -f adts \
         "$output_file"
 }
