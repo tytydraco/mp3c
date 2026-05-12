@@ -33,7 +33,7 @@ function convert_video_agptek_m6_avi() {
         -g 7 \
         -vb 1500000 \
         -ac 1 \
-        -ar 48000 \
+        -ar 16000 \
         -r 30 \
         "$output_file"
 }
