@@ -2,6 +2,7 @@
 
 CONVERTERS_AUDIO=(
     "convert_audio_adts_aac"
+    "convert_audio_mp3"
 )
 CONVERTERS_IMAGE=(
     "convert_image_agptek_m6_jpg"
