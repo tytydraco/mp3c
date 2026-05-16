@@ -15,8 +15,7 @@ function convert_video_1080p_mkv() {
     ffmpeg \
         -i "$input_file" \
         -n \
-        -f mkv \
-        -vf "scale=${size}" \
+        -vf "scale=$size" \
         -pix_fmt yuv420p \
         -c:v libx264 \
         -c:a copy \
