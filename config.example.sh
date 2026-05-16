@@ -14,6 +14,7 @@ CONVERTERS_TEXT=(
     "convert_text_txt"
 )
 CONVERTERS_VIDEO=(
+    "convert_video_1080p_mkv"
     "convert_video_agptek_m6_avi"
     "convert_video_ruizu_x52_amv"
 )
