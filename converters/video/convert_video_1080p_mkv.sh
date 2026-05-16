@@ -11,11 +11,11 @@ function convert_video_1080p_mkv() {
         return 0
     fi
 
-    local size="'if(gt(ih, iw), -2, 1920)':'if(gt(ih, iw), 1920, -2)'"
+    local size="'if(gt(ih, iw), -2, min(1920, iw))':'if(gt(ih, iw), min(1920, ih), -2)'"
     ffmpeg \
         -i "$input_file" \
         -n \
-        -vf "scale=$size" \
+        -vf "scale=$size:force_divisible_by=2" \
         -pix_fmt yuv420p \
         -c:v libx264 \
         -c:a copy \
