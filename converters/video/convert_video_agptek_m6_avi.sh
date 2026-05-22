@@ -12,7 +12,7 @@ function convert_video_agptek_m6_avi() {
     fi
 
     local size="'if(gt(ih, iw), 240, 320)':'if(gt(ih, iw), 320, 240)'"
-    wine converters/ffmpeg-mod.exe \
+    WINEDEBUG=-all wine converters/ffmpeg-mod.exe \
         -i "$input_file" \
         -n \
         -map 0:v:0 \
