@@ -20,7 +20,7 @@ function convert_video_agptek_m6_avi() {
             "$1" | grep -q .
     }
 
-    local audio_sample_rate=16000
+    local audio_sample_rate=22050
     local size="'if(gt(ih, iw), 240, 320)':'if(gt(ih, iw), 320, 240)'"
     local ffmpeg_args=(
         -n
