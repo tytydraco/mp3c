@@ -36,7 +36,6 @@ function convert_video_agptek_m6_avi() {
         -bufsize 2M
         -maxrate 2M
         -refs 1
-        -g 7
         -ac 1
         -ar "$audio_sample_rate"
         -r 30
