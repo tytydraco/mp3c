@@ -27,6 +27,7 @@ function convert_video_agptek_m6_avi() {
         -preset:v superfast
         -profile:v baseline
         -f avi
+        -x264-params "aq-mode=2"
         -vf "scale=$size:force_original_aspect_ratio=decrease,pad=$size:(ow-iw)/2:(oh-ih)/2:black,transpose=2:passthrough=portrait"
         -strict -1
         -c:v libx264
