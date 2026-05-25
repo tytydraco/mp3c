@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+FFMPEG_MOD="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/ffmpeg-mod.exe"
+
 function convert_video_generic_avi() {
     [[ -z "${1:-}" ]] && return 1
 
@@ -58,14 +60,12 @@ function convert_video_generic_avi() {
         )
     fi
 
-    local script_dir
-    script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-    WINEDEBUG=-all wine "$script_dir/ffmpeg-mod.exe" \
+    WINEDEBUG=-all wine "$FFMPEG_MOD" \
         -i "$input_file" \
         "${ffmpeg_map_args[@]}" \
         "${ffmpeg_args[@]}" \
         "$output_file"
 }
 
+export FFMPEG_MOD
 export -f convert_video_generic_avi
