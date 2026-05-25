@@ -16,6 +16,7 @@ function convert_image_generic_bmp() {
         -rotate "-90>"      # Rotate if needed.
         -gravity center     # Center within canvas.
         -background black   # Pad with black.
+        -alpha remove       # Remove alpha channel.
         -resize "$size"     # Contain within size.
         -extent "$size"     # Use entire lenght.
     )
