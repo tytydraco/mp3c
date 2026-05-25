@@ -58,8 +58,10 @@ function convert_video_generic_avi() {
         )
     fi
 
-    
-    WINEDEBUG=-all wine converters/ffmpeg-mod.exe \
+    local script_dir
+    script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+    WINEDEBUG=-all wine "$script_dir/ffmpeg-mod.exe" \
         -i "$input_file" \
         "${ffmpeg_map_args[@]}" \
         "${ffmpeg_args[@]}" \

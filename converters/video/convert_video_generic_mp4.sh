@@ -24,6 +24,7 @@ function convert_video_generic_mp4() {
         -c:a aac                                                                            # AAC audio codec.
         -profile:a aac_low                                                                  # AAC low profile.
     )
+
     ffmpeg \
         -i "$input_file" \
         "${ffmpeg_args[@]}" \
