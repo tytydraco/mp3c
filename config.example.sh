@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+PRESERVE_ORIGINAL="true"
 CONVERTERS_AUDIO=(
     "convert_audio_adts_aac"
     "convert_audio_mp3"
@@ -17,6 +18,7 @@ CONVERTERS_VIDEO=(
     "convert_video_generic_amv"
 )
 
+export PRESERVE_ORIGINAL
 export CONVERTERS_AUDIO
 export CONVERTERS_IMAGE
 export CONVERTERS_TEXT

@@ -34,6 +34,8 @@ function convert_file() {
     for converter in "${converters[@]}"; do
         eval "$converter" "$(printf '%q' "$input_file")"
     done
+
+    [[ "$PRESERVE_ORIGINAL" != "true" ]] && rm -f "$input_file"
 }
 
 export -f convert_file
