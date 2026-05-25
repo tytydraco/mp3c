@@ -33,7 +33,7 @@ function convert_file() {
     [[ "${#converters[@]}" -eq 0 ]] && return 0
 
     for converter in "${converters[@]}"; do
-        "$converter" "$input_file"
+        eval "$converter" "$input_file"
     done
 }
 

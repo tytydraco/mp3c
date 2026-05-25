@@ -14,9 +14,9 @@ CONVERTERS_TEXT=(
     "convert_text_txt"
 )
 CONVERTERS_VIDEO=(
-    "convert_video_1080p_mp4"
-    "convert_video_agptek_m6_avi"
-    "convert_video_ruizu_x52_amv"
+    "convert_video_generic_mp4"
+    "convert_video_generic_avi"
+    "convert_video_generic_amv"
 )
 
 export CONVERTERS_AUDIO
