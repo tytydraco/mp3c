@@ -6,16 +6,17 @@ function convert_audio_mp3() {
     local input_file="$1"
     local output_file="${input_file%.*}.mp3"
 
-    if [[ "$input_file" == "$output_file" ]]; then
-        echo "[$0] Input is already converted: $input_file"
-        return 0
-    fi
+    [[ "$input_file" == "$output_file" ]] && return 0
+
+    local ffmpeg_args=(
+        -n          # Do not replace existing files.
+        -f mp3      # MP3 container.
+        -q:a 2      # Target transparent quality.
+    )
 
     ffmpeg \
         -i "$input_file" \
-        -n \
-        -f mp3 \
-        -q:a 2 \
+        "${ffmpeg_args[@]}" \
         "$output_file"
 }
 

@@ -4,19 +4,20 @@ function convert_audio_adts_aac() {
     [[ -z "${1:-}" ]] && return 1
 
     local input_file="$1"
-    local output_file="${input_file%.*}.adts.aac"
+    local output_file="${input_file%.*}.aac"
 
-    if [[ "$input_file" == "$output_file" ]]; then
-        echo "[$0] Input is already converted: $input_file"
-        return 0
-    fi
+    [[ "$input_file" == "$output_file" ]] && return 0
+
+    local ffmpeg_args=(
+        -n          # Do not replace existing files.
+        -f adts     # ADTS container.
+        -c:a aac    # AAC codec.
+        -b:a 256k   # Target average bitrate.
+    )
 
     ffmpeg \
         -i "$input_file" \
-        -n \
-        -c:a aac \
-        -b:a 256k \
-        -f adts \
+        "${ffmpeg_args[@]}" \
         "$output_file"
 }
 

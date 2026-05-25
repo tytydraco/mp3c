@@ -29,11 +29,10 @@ function convert_file() {
             ;;
     esac
 
-    # Nothing to convert.
     [[ "${#converters[@]}" -eq 0 ]] && return 0
 
     for converter in "${converters[@]}"; do
-        eval "$converter" "$input_file"
+        eval "$converter" "$(printf '%q' "$input_file")"
     done
 }
 

@@ -5,10 +5,8 @@ CONVERTERS_AUDIO=(
     "convert_audio_mp3"
 )
 CONVERTERS_IMAGE=(
-    "convert_image_agptek_m6_jpg"
-    "convert_image_agptek_m6_bmp"
-    "convert_image_ruizu_x52_jpg"
-    "convert_image_ruizu_x52_bmp"
+    "convert_image_generic_jpg"
+    "convert_image_generic_bmp"
 )
 CONVERTERS_TEXT=(
     "convert_text_txt"

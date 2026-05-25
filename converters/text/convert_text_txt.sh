@@ -6,10 +6,7 @@ function convert_text_txt() {
     local input_file="$1"
     local output_file="${input_file%.*}.txt"
 
-    if [[ "$input_file" == "$output_file" ]]; then
-        echo "[$0] Input is already converted: $input_file"
-        return 0
-    fi
+    [[ "$input_file" == "$output_file" ]] && return 0
 
     pandoc \
         "$input_file" \
