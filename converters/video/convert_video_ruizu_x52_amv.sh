@@ -15,39 +15,63 @@ function convert_video_ruizu_x52_amv() {
         ffprobe \
             -v error \
             -select_streams a:0 \
-            -show_entries stream=index \
-            -of csv=p=0 \
+            -show_entries "stream=index" \
+            -of "csv=p=0" \
             "$1" | grep -q .
     }
 
-    local audio_sample_rate=22050
+    # Return the closest allowed ceiling frame rate for a video file.
+    function fps_ceil() {
+        local fps_allowed=(9 10 14 15 18 21 25 30)
+        local fps_max="${fps_allowed[-1]}"
+        local fps_original
+        local fps_nearest
+
+        fps_original="$(ffprobe \
+            -v error \
+            -select_streams v:0 \
+            -show_entries "stream=r_frame_rate" \
+            -of csv=p=0 \
+            "$1" | awk -F '/' '{ print $1 / $2 }')"
+        fps_nearest="$(printf \
+            "%s\n" \
+            "${fps_allowed[@]}" | awk \
+                -v fps="$fps_original" \
+                '$1 >= fps { print $1; exit }')"
+        
+        echo "${fps_nearest:-"$fps_max"}"
+    }
+
+    local fps
+    local block_size
+
+    fps="$(fps_ceil "$input_file")"
+    block_size=$((22050 / fps))
+
     local ffmpeg_args=(
-        -n
-        -preset:v superfast
-        -f amv
-        -vf "scale=128:128:force_original_aspect_ratio=decrease"
-        -strict -1
-        -c:v amv
-        -c:a adpcm_ima_amv
-        -ac 1
-        -ar "$audio_sample_rate"
-        -r 30
-        -block_size 735
+        -n                                                                  # Do not replace existing files.
+        -f amv                                                              # AMV container.
+        -strict:v experimental                                              # Allow non-standard scaling.
+        -c:v amv                                                            # AMV codec.
+        -filter:v "scale=128:128:force_original_aspect_ratio=decrease"      # Contain within 128x128, preserve aspect ratio.
+        -r:v "$fps"                                                         # Closest allowed ceiling frame rate.
+        -q:v 0                                                              # Disable QP.
+        -block_size:a "$block_size"                                         # Corresponding audio block size.
     )
 
     local ffmpeg_map_args=()
     if has_audio "$input_file"; then
         ffmpeg_map_args=(
-            -map 0:v:0
-            -map 0:a:0
+            -map 0:v:0                                                      # Choose first video stream.
+            -map 0:a:0                                                      # Choose first audio stream.
         )
     else
         ffmpeg_map_args=(
-            -f lavfi 
-            -i "anullsrc=channel_layout=mono:sample_rate=$audio_sample_rate"
-            -map 0:v:0
-            -map 1:a
-            -shortest
+            -f lavfi                                                        # Virtual audio device.
+            -i "anullsrc=channel_layout=mono:sample_rate=22050"             # 22.05 kHz silent audio (minimum).
+            -map 0:v:0                                                      # Choose first video stream.
+            -map 1:a                                                        # Include silent audio.
+            -shortest                                                       # Stop encoding when video stream ends.
         )
     fi
 
