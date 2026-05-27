@@ -2,11 +2,11 @@
 
 FFMPEG_MOD="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/ffmpeg-mod.exe"
 
-function convert_video_240x320_pcms16le_avi() {
+function convert_video_240x296_h264_pcms16le_avi() {
     [[ -z "${1:-}" ]] && return 1
 
     local input_file="$1"
-    local output_file="${input_file%.*}.240x320_pcms16le.avi"
+    local output_file="${input_file%.*}.240x296_h264_pcms16le.avi"
 
     function has_audio() {
         ffprobe \
@@ -17,7 +17,7 @@ function convert_video_240x320_pcms16le_avi() {
             "$1" | grep -q .
     }
 
-    local size="'if(gt(ih, iw), 240, 320)':'if(gt(ih, iw), 320, 240)'"
+    local size="'if(gt(ih, iw), 240, 296)':'if(gt(ih, iw), 296, 240)'"
     local ffmpeg_args=(
         -n                                                                                                                                      # Do not replace existing files.
         -f avi                                                                                                                                  # AVI container.
@@ -61,4 +61,4 @@ function convert_video_240x320_pcms16le_avi() {
 }
 
 export FFMPEG_MOD
-export -f convert_video_240x320_pcms16le_avi
+export -f convert_video_240x296_h264_pcms16le_avi
