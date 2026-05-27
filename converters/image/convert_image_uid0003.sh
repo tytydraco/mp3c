@@ -6,13 +6,13 @@ function convert_image_uid0003() {
     local input_file="$1"
     local output_file="${input_file%.*}.uid0003.jpg"
 
-    local size="240x320"
+    local size="128x160"
     local convert_args=(
         -interlace none     # Remove interlace.
-        -rotate "-90>"      # Rotate if needed.
         -gravity center     # Center within canvas.
         -background black   # Pad with black.
         -resize "$size"     # Contain within size.
+        -rotate "-90>"      # Rotate if needed.
         -extent "$size"     # Use entire length.
     )
 
