@@ -15,7 +15,7 @@ CONVERTERS_TEXT=(
 CONVERTERS_VIDEO=(
     "convert_video_generic_mp4"
     "convert_video_240x320_h264_pcms16le_avi"
-    "convert_video_240x296_h264_pcms16le_avi"
+    "convert_video_240x288_h264_pcms16le_avi"
     "convert_video_128x160_mjpeg_pcms16le_avi"
     "convert_video_generic_amv"
 )
