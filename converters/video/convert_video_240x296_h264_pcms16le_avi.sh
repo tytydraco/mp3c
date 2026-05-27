@@ -24,7 +24,7 @@ function convert_video_240x288_h264_pcms16le_avi() {
         -c:v libx264                                                                                                                            # H.264 codec.
         -profile:v baseline                                                                                                                     # H.264 baseline profile.
         -filter:v "scale=$size:force_original_aspect_ratio=decrease,pad=$size:(ow-iw)/2:(oh-ih)/2:black,transpose=cclock:passthrough=portrait"  # Contain within size, preserve aspect ratio, pad, pre-rotate counter-clockwise (portrait bypass).
-        -pix_fmt:v yuv420p                                                                                                                      # yuv420p pixel format.
+        -pix_fmt:v yuvj420p                                                                                                                     # Full range pixel format.
         -bufsize:v 2M                                                                                                                           # Hardware buffer size.
         -maxrate:v 2M                                                                                                                           # Limit bitrate.
         -b:v 1M                                                                                                                                 # Target average bitrate.

@@ -19,7 +19,7 @@ function convert_video_generic_mp4() {
         -map 0:a:0?                                                                         # Choose first audio stream, if it exists.
         -c:v libx264                                                                        # H.264 codec.
         -filter:v "scale=$size:force_original_aspect_ratio=decrease:force_divisible_by=2"   # Contain within size, preserve aspect ratio, ensure even lengths.
-        -pix_fmt:v yuv420p                                                                  # yuv420p pixel format.
+        -pix_fmt:v yuvj420p                                                                 # yuvj420p pixel format.
         -fpsmax:v "$maxfps"                                                                 # Limit FPS.
         -c:a aac                                                                            # AAC audio codec.
         -profile:a aac_low                                                                  # AAC low profile.
