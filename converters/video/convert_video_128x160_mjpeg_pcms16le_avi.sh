@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-FFMPEG_MOD="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/ffmpeg-mod.exe"
-
 function convert_video_128x160_mjpeg_pcms16le_avi() {
     [[ -z "${1:-}" ]] && return 1
 
@@ -48,12 +46,11 @@ function convert_video_128x160_mjpeg_pcms16le_avi() {
         )
     fi
 
-    WINEDEBUG=-all wine "$FFMPEG_MOD" \
+    ffmpeg \
         -i "$input_file" \
         "${ffmpeg_map_args[@]}" \
         "${ffmpeg_args[@]}" \
         "$output_file"
 }
 
-export FFMPEG_MOD
 export -f convert_video_128x160_mjpeg_pcms16le_avi
