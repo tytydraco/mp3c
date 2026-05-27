@@ -1,15 +1,10 @@
 #!/usr/bin/env bash
 
-function convert_video_generic_amv() {
+function convert_video_uid0004() {
     [[ -z "${1:-}" ]] && return 1
 
-    local name="${NAME:-generic}"
-    local width="${WIDTH:-128}"
-    local height="${HEIGHT:-128}"
-    local maxfps="${MAXFPS:-30}"
-
     local input_file="$1"
-    local output_file="${input_file%.*}.${name}_${width}x${height}.amv"
+    local output_file="${input_file%.*}.uid0004.amv"
 
     function has_audio() {
         ffprobe \
@@ -27,7 +22,8 @@ function convert_video_generic_amv() {
         local fps_original
         local fps_nearest
 
-        readarray -t fps_allowed < <(seq 9 "$maxfps" | awk '22050 % $1 == 0 { print $1 }')
+        # Find valid FPS within [9, 30].
+        readarray -t fps_allowed < <(seq 9 30 | awk '22050 % $1 == 0 { print $1 }')
         fps_max="${fps_allowed[-1]}"
 
         fps_original="$(ffprobe \
@@ -56,7 +52,7 @@ function convert_video_generic_amv() {
         -f amv                                                                  # AMV container.
         -strict:v experimental                                                  # Allow non-standard scaling.
         -c:v amv                                                                # AMV codec.
-        -filter:v "scale=$width:$height:force_original_aspect_ratio=decrease"   # Contain within size, preserve aspect ratio.
+        -filter:v "scale=128:128:force_original_aspect_ratio=decrease"          # Contain within size, preserve aspect ratio.
         -r:v "$fps"                                                             # Closest allowed ceiling frame rate.
         -q:v 0                                                                  # Disable QP.
         -block_size:a "$block_size"                                             # Corresponding audio block size.
@@ -85,4 +81,4 @@ function convert_video_generic_amv() {
         "$output_file"
 }
 
-export -f convert_video_generic_amv
+export -f convert_video_uid0004

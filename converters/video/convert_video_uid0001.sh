@@ -2,11 +2,11 @@
 
 FFMPEG_MOD="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/ffmpeg-mod.exe"
 
-function convert_video_240x288_h264_pcms16le_avi() {
+function convert_video_uid0001() {
     [[ -z "${1:-}" ]] && return 1
 
     local input_file="$1"
-    local output_file="${input_file%.*}.240x288_h264_pcms16le.avi"
+    local output_file="${input_file%.*}.uid0001.avi"
 
     function has_audio() {
         ffprobe \
@@ -61,4 +61,4 @@ function convert_video_240x288_h264_pcms16le_avi() {
 }
 
 export FFMPEG_MOD
-export -f convert_video_240x288_h264_pcms16le_avi
+export -f convert_video_uid0001

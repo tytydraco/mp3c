@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-function convert_video_128x160_mjpeg_pcms16le_avi() {
+function convert_video_uid0002() {
     [[ -z "${1:-}" ]] && return 1
 
     local input_file="$1"
-    local output_file="${input_file%.*}.128x160_mjpeg_pcms16le.avi"
+    local output_file="${input_file%.*}.uid0002.avi"
 
     function has_audio() {
         ffprobe \
@@ -53,4 +53,4 @@ function convert_video_128x160_mjpeg_pcms16le_avi() {
         "$output_file"
 }
 
-export -f convert_video_128x160_mjpeg_pcms16le_avi
+export -f convert_video_uid0002

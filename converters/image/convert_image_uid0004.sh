@@ -1,23 +1,19 @@
 #!/usr/bin/env bash
 
-function convert_image_generic_jpg() {
+function convert_image_uid0004() {
     [[ -z "${1:-}" ]] && return 1
 
-    local name="${NAME:-generic}"
-    local width="${WIDTH:-240}"
-    local height="${HEIGHT:-320}"
-
     local input_file="$1"
-    local output_file="${input_file%.*}.${name}_${width}x${height}.jpg"
+    local output_file="${input_file%.*}.uid0004.jpg"
 
-    local size="${width}x${height}"
+    local size="128x128"
     local convert_args=(
         -interlace none     # Remove interlace.
         -rotate "-90>"      # Rotate if needed.
         -gravity center     # Center within canvas.
         -background black   # Pad with black.
         -resize "$size"     # Contain within size.
-        -extent "$size"     # Use entire lenght.
+        -extent "$size"     # Use entire length.
     )
 
     convert \
@@ -26,4 +22,4 @@ function convert_image_generic_jpg() {
         "$output_file"
 }
 
-export -f convert_image_generic_jpg
+export -f convert_image_uid0004

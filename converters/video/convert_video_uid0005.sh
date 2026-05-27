@@ -1,17 +1,12 @@
 #!/usr/bin/env bash
 
-function convert_video_generic_mp4() {
+function convert_video_uid0005() {
     [[ -z "${1:-}" ]] && return 1
 
-    local name="${NAME:-generic}"
-    local width="${WIDTH:-1920}"
-    local height="${HEIGHT:-1080}"
-    local maxfps="${MAXFPS:-30}"
-
     local input_file="$1"
-    local output_file="${input_file%.*}.${name}_${width}x${height}.mp4"
+    local output_file="${input_file%.*}.uid0005.mp4"
 
-    local size="'if(gt(ih, iw), -2, min($width, iw))':'if(gt(ih, iw), min($height, ih), -2)'"
+    local size="'if(gt(ih, iw), -2, min(1340, iw))':'if(gt(ih, iw), min(800, ih), -2)'"
     local ffmpeg_args=(
         -n                                                                                                              # Do not replace existing files.
         -f mp4                                                                                                          # MP4 container.
@@ -20,7 +15,7 @@ function convert_video_generic_mp4() {
         -c:v libx264                                                                                                    # H.264 codec.
         -filter:v "scale=$size:force_original_aspect_ratio=decrease:force_divisible_by=2:in_range=auto:out_range=tv"    # Contain within size, preserve aspect ratio, ensure even lengths, ensure TV range pixel format.
         -pix_fmt:v yuv420p                                                                                              # TV range pixel format.
-        -fpsmax:v "$maxfps"                                                                                             # Limit FPS.
+        -fpsmax:v 30                                                                                                    # Limit FPS.
         -c:a aac                                                                                                        # AAC audio codec.
         -profile:a aac_low                                                                                              # AAC low profile.
     )
@@ -31,4 +26,4 @@ function convert_video_generic_mp4() {
         "$output_file"
 }
 
-export -f convert_video_generic_mp4
+export -f convert_video_uid0005
