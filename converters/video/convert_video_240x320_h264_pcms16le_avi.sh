@@ -32,7 +32,7 @@ function convert_video_240x320_h264_pcms16le_avi() {
         -g:v 30                                                                                                                                 # GOP length every 1 second.
         -qmin:v 18                                                                                                                              # Limit maximum I-frame complexity.
         -c:a pcm_s16le                                                                                                                          # 16-bit PCM audio codec.
-        -ac:a 1                                                                                                                                 # Mono audio.
+        -ac:a 2                                                                                                                                 # Stereo audio.
     )
 
     local ffmpeg_map_args=()
