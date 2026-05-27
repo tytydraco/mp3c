@@ -30,7 +30,7 @@ function convert_video_240x320_h264_pcms16le_avi() {
         -b:v 1M                                                                                                                                 # Target average bitrate.
         -fpsmax:v 30                                                                                                                            # Limit FPS.
         -g:v 30                                                                                                                                 # GOP length every 1 second.
-        -qmin:v 18                                                                                                                              # Limit maximum I-frame complexity.
+        -qmin:v 12                                                                                                                              # Limit maximum I-frame complexity.
         -c:a pcm_s16le                                                                                                                          # 16-bit PCM audio codec.
         -ac:a 2                                                                                                                                 # Stereo audio.
     )
