@@ -32,7 +32,6 @@ function convert_video_uid0001() {
         -g:v 30                                                                                                                                 # GOP length every 1 second.
         -qmin:v 12                                                                                                                              # Limit maximum I-frame complexity.
         -c:a pcm_s16le                                                                                                                          # 16-bit PCM audio codec.
-        -ac:a 2                                                                                                                                 # Stereo audio.
     )
 
     local ffmpeg_map_args=()

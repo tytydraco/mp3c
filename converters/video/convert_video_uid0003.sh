@@ -25,7 +25,6 @@ function convert_video_uid0003() {
         -fpsmax:v 30                                                                                                                                    # Limit FPS.
         -q:v 0                                                                                                                                          # Lossless quality.
         -c:a pcm_s16le                                                                                                                                  # 16-bit PCM audio codec.
-        -ac:a 2                                                                                                                                         # Stereo audio.
     )
 
     local ffmpeg_map_args=()
