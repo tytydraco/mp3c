@@ -10,7 +10,7 @@ function convert_audio_adts_aac() {
 
     local ffmpeg_args=(
         -n          # Do not replace existing files.
-        -f adts     # ADTS container.
+        -f adts     # ADTS format.
         -c:a aac    # AAC codec.
         -b:a 256k   # Target average bitrate.
     )

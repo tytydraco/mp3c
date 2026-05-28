@@ -6,18 +6,23 @@ CONVERTERS_AUDIO=(
     "convert_audio_mp3"
 )
 CONVERTERS_IMAGE=(
-    "convert_image_generic_jpg"
-    "convert_image_generic_bmp"
+    "convert_image_uid0001"
+    "convert_image_uid0002"
+    "convert_image_uid0003"
+    "convert_image_uid0004"
+    "convert_image_uid0005"
+    "convert_image_uid0006"
 )
 CONVERTERS_TEXT=(
     "convert_text_txt"
 )
 CONVERTERS_VIDEO=(
-    "convert_video_generic_mp4"
-    "convert_video_240x320_h264_pcms16le_avi"
-    "convert_video_240x288_h264_pcms16le_avi"
-    "convert_video_128x160_mjpeg_pcms16le_avi"
-    "convert_video_generic_amv"
+    "convert_video_uid0001"
+    "convert_video_uid0002"
+    "convert_video_uid0003"
+    "convert_video_uid0004"
+    "convert_video_uid0005"
+    "convert_video_uid0006"
 )
 
 export PRESERVE_ORIGINAL

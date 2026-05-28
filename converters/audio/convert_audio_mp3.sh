@@ -10,7 +10,7 @@ function convert_audio_mp3() {
 
     local ffmpeg_args=(
         -n          # Do not replace existing files.
-        -f mp3      # MP3 container.
+        -f mp3      # MP3 format.
         -q:a 2      # Target transparent quality.
     )
 

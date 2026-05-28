@@ -23,7 +23,7 @@ function convert_video_uid0003() {
         -filter:v "scale=$size:force_original_aspect_ratio=decrease,pad=$size:(ow-iw)/2:(oh-ih)/2:black,transpose=cclock:passthrough=portrait,vflip"    # Contain within size, preserve aspect ratio, pad, pre-rotate counter-clockwise (portrait bypass), flip vertically.
         -pix_fmt:v yuvj420p                                                                                                                             # Full range pixel format.
         -fpsmax:v 30                                                                                                                                    # Limit FPS.
-        -q:v 0                                                                                                                                          # Disable QP.
+        -q:v 0                                                                                                                                          # Lossless quality.
         -c:a pcm_s16le                                                                                                                                  # 16-bit PCM audio codec.
         -ac:a 2                                                                                                                                         # Stereo audio.
     )
