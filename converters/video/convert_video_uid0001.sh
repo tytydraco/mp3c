@@ -25,12 +25,14 @@ function convert_video_uid0001() {
         -profile:v baseline                                                                                                                     # H.264 baseline profile.
         -filter:v "scale=$size:force_original_aspect_ratio=decrease,pad=$size:(ow-iw)/2:(oh-ih)/2:black,transpose=cclock:passthrough=portrait"  # Contain within size, preserve aspect ratio, pad, pre-rotate counter-clockwise (portrait bypass).
         -pix_fmt:v yuvj420p                                                                                                                     # Full range pixel format.
-        -bufsize:v 2M                                                                                                                           # Hardware buffer size.
-        -maxrate:v 2M                                                                                                                           # Limit bitrate.
+        -bufsize:v 10M                                                                                                                          # Hardware buffer size.
+        -maxrate:v 10M                                                                                                                          # Limit bitrate.
         -b:v 1M                                                                                                                                 # Target average bitrate.
         -fpsmax:v 30                                                                                                                            # Limit FPS.
         -g:v 30                                                                                                                                 # GOP length every 1 second.
-        -qmin:v 12                                                                                                                              # Limit maximum I-frame complexity.
+        -keyint_min:v 30                                                                                                                        # Allow one IDR per GOP.
+        -qmin 20
+        -sc_threshold:v 0                                                                                                                       # Disable scenecut IDRs.
         -c:a pcm_s16le                                                                                                                          # 16-bit PCM audio codec.
     )
 
