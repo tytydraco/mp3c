@@ -30,30 +30,39 @@ function convert_video_uid0001() {
         echo "${fps_original:-30}"
     }
 
-    function bufsize() {
+    # Scale bitrate using the frame rate, using 2 Mbps @ 30fps as a reference point.
+    function scaled_bitrate() {
         local fps="$1"
-        local maxrate=10000 # 10 Mbps safe device data rate.
-
-        awk -v fps="$fps" -v maxrate="$maxrate" 'BEGIN { printf "%d", maxrate / fps }'
+        
+        # reference_bitrate kbps @ reference_fps fps. Device can handle up to 10 Mbps.
+        local max_bitrate=10000
+        local reference_bitrate=1500
+        local reference_fps=30 
+        awk \
+            -v fps="$fps" \
+            -v m_bitrate="$max_bitrate" \
+            -v r_bitrate="$reference_bitrate" \
+            -v r_fps="$reference_fps" \
+            'BEGIN { v = r_bitrate * fps / r_fps; if (v > m_bitrate) v = m_bitrate; if (v < 1) v = 1; printf "%d", v }'
     }
 
     local fps
-    local bufsize
+    local bitrate
     fps="$(fps_original "$input_file")"
-    bufsize="$(bufsize "$fps")"
+    bitrate="$(scaled_bitrate "$fps")"
 
     local size="'if(gt(ih, iw), 240, 288)':'if(gt(ih, iw), 288, 240)'"
-    local ffmpeg_args=(
+    local ffmpeg_args=( 
         -n                                                                                                                                      # Do not replace existing files.
         -f avi                                                                                                                                  # AVI container.
         -c:v libx264                                                                                                                            # H.264 codec.
+        -x264-params "aq-mode=3:aq-strength=0.8"                                                                                                # Auto-variance AQ for dark scenes.
         -profile:v baseline                                                                                                                     # H.264 baseline profile.
         -filter:v "scale=$size:force_original_aspect_ratio=decrease,pad=$size:(ow-iw)/2:(oh-ih)/2:black,transpose=cclock:passthrough=portrait"  # Contain within size, preserve aspect ratio, pad, pre-rotate counter-clockwise (portrait bypass).
         -pix_fmt:v yuvj420p                                                                                                                     # Full range pixel format.
-        -bufsize:v "${bufsize}K"                                                                                                                # Calculated buffer size to clamp I-frame sizes.
-        -maxrate:v 10M                                                                                                                          # Limit bitrate.
-        -b:v 2M                                                                                                                                 # Target average bitrate.
-        -r:v "$fps"                                                                                                                             # Match original source FPS.
+        -b:v "${bitrate}K"                                                                                                                      # Target average bitrate.
+        -fpsmax:v 30                                                                                                                            # Match original source FPS.
+        -qmin:v 20                                                                                                                              # Limit I-frame complexity.
         -g:v 1                                                                                                                                  # Only I-frames.
         -sc_threshold:v 0                                                                                                                       # Disable scene-cut.
         -c:a pcm_s16le                                                                                                                          # 16-bit PCM audio codec.
