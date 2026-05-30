@@ -66,6 +66,7 @@ function convert_video_uid0001() {
         -g:v 1                                                                                                                                  # Only I-frames.
         -sc_threshold:v 0                                                                                                                       # Disable scene-cut.
         -c:a pcm_s16le                                                                                                                          # 16-bit PCM audio codec.
+        -ac:a 1                                                                                                                                 # Mono audio.
     )
 
     local ffmpeg_map_args=()
