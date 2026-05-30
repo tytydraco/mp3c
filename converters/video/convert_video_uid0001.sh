@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-FFMPEG_MOD="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/ffmpeg-mod.exe"
-
 function convert_video_uid0001() {
     [[ -z "${1:-}" ]] && return 1
 
@@ -59,6 +57,7 @@ function convert_video_uid0001() {
         -x264-params "aq-mode=3:aq-strength=0.8"                                                                                                # Auto-variance AQ for dark scenes.
         -profile:v baseline                                                                                                                     # H.264 baseline profile.
         -filter:v "scale=$size:force_original_aspect_ratio=decrease,pad=$size:(ow-iw)/2:(oh-ih)/2:black,transpose=cclock:passthrough=portrait"  # Contain within size, preserve aspect ratio, pad, pre-rotate counter-clockwise (portrait bypass).
+        -bsf:v "filter_units=remove_types=6"                                                                                                    # Remove SEI.
         -pix_fmt:v yuvj420p                                                                                                                     # Full range pixel format.
         -b:v "${bitrate}K"                                                                                                                      # Target average bitrate.
         -fpsmax:v 30                                                                                                                            # Match original source FPS.
@@ -87,12 +86,11 @@ function convert_video_uid0001() {
         )
     fi
 
-    WINEDEBUG=-all wine "$FFMPEG_MOD" \
-        -i "$input_file" \
+    "$FFMPEG_ATJ_PATCH" \
+    	-i "$input_file" \
         "${ffmpeg_map_args[@]}" \
         "${ffmpeg_args[@]}" \
         "$output_file"
 }
 
-export FFMPEG_MOD
 export -f convert_video_uid0001

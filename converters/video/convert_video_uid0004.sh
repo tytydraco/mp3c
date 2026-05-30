@@ -87,7 +87,7 @@ function convert_video_uid0004() {
         )
     fi
 
-    WINEDEBUG=-all wine "$FFMPEG_MOD" \
+    "$FFMPEG_ATJ_PATCH" \
         -i "$input_file" \
         "${ffmpeg_map_args[@]}" \
         "${ffmpeg_args[@]}" \

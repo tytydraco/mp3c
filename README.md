@@ -25,6 +25,10 @@ changes. The output folder will be copied to `docker_out`.
 - `./docker.sh run`: Executes `main.sh` and starts the program.
 - `./docker.sh clean`: Removes the container.
 
+# ATJ Patch
+
+- [Patched x264 FFMPEG for ATJ chips](https://github.com/tytydraco/ffmpeg-atj-patch)
+
 # Credit
 
 - [Patched FFMPEG from fdd4s](https://github.com/fdd4s/portable_music_player_avi_video_converter_tool_2025)

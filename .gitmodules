@@ -1,0 +1,3 @@
+[submodule "tools/ffmpeg/ffmpeg-atj-patch"]
+	path = tools/ffmpeg/ffmpeg-atj-patch
+	url = https://github.com/tytydraco/ffmpeg-atj-patch.git
