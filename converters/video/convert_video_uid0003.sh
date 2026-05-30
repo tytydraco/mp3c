@@ -20,11 +20,12 @@ function convert_video_uid0003() {
         -n                                                                                                                                              # Do not replace existing files.
         -f avi                                                                                                                                          # AVI container.
         -c:v mjpeg                                                                                                                                      # MJPEG codec.
-        -filter:v "scale=$size:force_original_aspect_ratio=decrease,pad=$size:(ow-iw)/2:(oh-ih)/2:black,transpose=cclock:passthrough=portrait,vflip"    # Contain within size, preserve aspect ratio, pad, pre-rotate counter-clockwise (portrait bypass), flip vertically.
+        -filter:v "scale=$size:force_original_aspect_ratio=decrease,pad=$size:(ow-iw)/2:(oh-ih)/2:black,transpose=clock:passthrough=portrait,vflip"     # Contain within size, preserve aspect ratio, pad, pre-rotate clockwise (portrait bypass), flip vertically.
         -pix_fmt:v yuvj420p                                                                                                                             # Full range pixel format.
         -fpsmax:v 30                                                                                                                                    # Limit FPS.
         -q:v 0                                                                                                                                          # Lossless quality.
         -c:a pcm_s16le                                                                                                                                  # 16-bit PCM audio codec.
+        -ac:a 2                                                                                                                                         # Stereo audio.
     )
 
     local ffmpeg_map_args=()
@@ -37,7 +38,7 @@ function convert_video_uid0003() {
     else
         ffmpeg_map_args=(
             -f lavfi                                                                                                                                    # Virtual audio device.
-            -i "anullsrc=channel_layout=mono:sample_rate=16000"                                                                                         # 16 kHz silent audio.
+            -i "anullsrc=channel_layout=stereo:sample_rate=16000"                                                                                       # 16 kHz silent audio.
             -map 0:v:0                                                                                                                                  # Choose first video stream.
             -map 1:a                                                                                                                                    # Include silent audio.
             -ar:a 16000                                                                                                                                 # 16 kHz audio rate.
