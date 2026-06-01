@@ -87,7 +87,7 @@ function convert_video_uid0002() {
         )
     fi
 
-    "$FFMPEG_ATJ_PATCH" \
+    "$FFMPEG_YP3" \
         -i "$input_file" \
         "${ffmpeg_map_args[@]}" \
         "${ffmpeg_args[@]}" \

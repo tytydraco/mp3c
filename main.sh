@@ -6,7 +6,7 @@ SCRIPT_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 WORKING_DIR="$SCRIPT_DIR/working"
 CONVERTERS_DIR="$SCRIPT_DIR/converters"
 CONFIG_FILE="$SCRIPT_DIR/config.sh"
-FFMPEG_ATJ_PATCH="$SCRIPT_DIR/tools/ffmpeg/ffmpeg-atj-patch/static/ffmpeg" # Or: WINEDEBUG=-all wine "$SCRIPT_DIR/tools/ffmpeg/vendor/ffmpeg-mod-shenju.exe"
+FFMPEG_YP3="$SCRIPT_DIR/tools/ffmpeg/ffmpeg-yp3-patch/static/ffmpeg" # Or: WINEDEBUG=-all wine "$SCRIPT_DIR/tools/ffmpeg/vendor/ffmpeg-mod-shenju.exe"
 
 function source_converters() {
     while IFS= read -r -d '' lib_file; do
@@ -37,7 +37,7 @@ export SCRIPT_DIR
 export WORKING_DIR
 export CONVERTERS_DIR
 export CONFIG_FILE
-export FFMPEG_ATJ_PATCH
+export FFMPEG_YP3
 
 # Execute the program.
 [[ "${BASH_SOURCE[0]}" == "$0" ]] && main
