@@ -23,8 +23,7 @@ function main() {
     fi
 
     # Pull latest submodules.
-    git submodule init
-    git submodule update --remote
+    git submodule update --init --recursive --remote
 
     source "$CONFIG_FILE"
     source_converters
