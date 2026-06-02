@@ -52,24 +52,33 @@ function convert_video_uid0005_experimental() {
     fi
 
     local vf="scale=128:128:force_original_aspect_ratio=decrease,pad=128:128:(ow-iw)/2:(oh-ih)/2:black,fps=542/25"
+    local ffmpeg_p1_args=(
+        -y                      # Replace existing files.
+        -c:v mjpeg              # MJPEG codec.
+        -filter:v "$vf"         # Contain within size, preserve aspect ratio, lock FPS.
+        -pix_fmt:v yuvj420p     # yuvj420p pixel format.
+        -c:a adpcm_ima_wav      # IMA ADPCM codec.
+        -ac:a 1                 # Mono audio.
+        -ar:a 22050             # 22.05 kHz audio rate.
+        -block_size:a 512       # 512 byte block size.
+    )
+    local ffmpeg_p2_args=(
+        -y                      # Replace existing files.
+        -f rawvideo             # Raw video container.
+        -c:v rawvideo           # Raw video codec.
+        -filter:v "$vf"         # Contain within size, preserve aspect ratio, lock FPS.
+        -pix_fmt:v yuv420p      # yuv420p pixel format.
+        -an                     # No audio stream.
+    )
+    
     ffmpeg \
         -i "$input_file" \
         "${ffmpeg_map_args[@]}" \
-        -filter:v "$vf" \
-        -pix_fmt yuvj420p \
-        -c:v mjpeg \
-        -ac:a 1 \
-        -c:a adpcm_ima_wav \
-        -ar:a 22050 \
-        -block_size:a 512 \
+         "${ffmpeg_p1_args[@]}" \
         "$tmpdir/element.avi"
     ffmpeg \
         -i "$input_file"  \
-        -filter:v "$vf" \
-        -an \
-        -c:v rawvideo \
-        -pix_fmt yuv420p \
-        -f rawvideo \
+        "${ffmpeg_p2_args[@]}" \
         "$tmpdir/element.yuv"
 
     python3 "$SCRIPT_DIR/tools/ffmpeg/atj-avi-encoder/build_scan_mjpeg.py" \
@@ -78,7 +87,7 @@ function convert_video_uid0005_experimental() {
         "$tmpdir/element.yuv" \
         "$output_file" \
         -n "$n_frames" \
-        -q "14" \
+        -q "0" \
         --fit tier
 
     rm -rf "$tmpdir"
