@@ -21,7 +21,8 @@ CONVERTERS_VIDEO=(
     "convert_video_uid0002"
     "convert_video_uid0003"
     "convert_video_uid0004"
-    "convert_video_uid0005"
+    "convert_video_uid0005"                         # AMV.
+    "convert_video_uid0005_experimental"            # AVI.
     "convert_video_uid0006"
 )
 

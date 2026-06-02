@@ -28,6 +28,7 @@ changes. The output folder will be copied to `docker_out`.
 # YP3 Patch
 
 - [Patched x264 FFMPEG for YP3 chips](https://github.com/tytydraco/ffmpeg-yp3-patch)
+- [Open source encoder/muxer for ATJ AVI MJPEG chips](https://github.com/tytydraco/atj-avi-encoder)
 
 # Credit
 

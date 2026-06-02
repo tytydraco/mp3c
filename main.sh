@@ -6,7 +6,9 @@ SCRIPT_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 WORKING_DIR="$SCRIPT_DIR/working"
 CONVERTERS_DIR="$SCRIPT_DIR/converters"
 CONFIG_FILE="$SCRIPT_DIR/config.sh"
+
 FFMPEG_YP3="$SCRIPT_DIR/tools/ffmpeg/ffmpeg-yp3-patch/static/ffmpeg" # Or: WINEDEBUG=-all wine "$SCRIPT_DIR/tools/ffmpeg/vendor/ffmpeg-mod-shenju.exe"
+ATJ_AVI_ENCODER="$SCRIPT_DIR/tools/ffmpeg/atj-avi-encoder/make-atj-avi-encoder.sh"
 
 function source_converters() {
     while IFS= read -r -d '' lib_file; do
@@ -38,6 +40,7 @@ export WORKING_DIR
 export CONVERTERS_DIR
 export CONFIG_FILE
 export FFMPEG_YP3
+export ATJ_AVI_ENCODER
 
 # Execute the program.
 [[ "${BASH_SOURCE[0]}" == "$0" ]] && main
