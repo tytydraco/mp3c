@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Experimental reverse-engineered ATJ MJPEG AVI.
-function convert_video_uid0005_experimental() {
+function convert_video_uid0005_mjpeg_avi() {
     [[ -z "${1:-}" ]] && return 1
 
     local input_file="$1"
@@ -93,4 +93,4 @@ function convert_video_uid0005_experimental() {
     rm -rf "$tmpdir"
 }
 
-export -f convert_video_uid0005_experimental
+export -f convert_video_uid0005_mjpeg_avi
