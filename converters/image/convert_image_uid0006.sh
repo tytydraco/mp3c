@@ -9,7 +9,6 @@ function convert_image_uid0006() {
     local convert_args=(
         -interlace none         # Remove interlace.
         -auto-orient            # Rotate if needed.
-        -gravity center         # Center within canvas.
         -resize "1340x1340>"    # Contain within size or smaller.
     )
 

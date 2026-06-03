@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-function convert_image_uid0003() {
+function convert_image_uid0007() {
     [[ -z "${1:-}" ]] && return 1
 
     local input_file="$1"
-    local output_file="${input_file%.*}.uid0003.jpg"
+    local output_file="${input_file%.*}.uid0007.jpg"
 
     local size="128x160"
     local convert_args=(
@@ -19,4 +19,4 @@ function convert_image_uid0003() {
         "$output_file"
 }
 
-export -f convert_image_uid0003
+export -f convert_image_uid0007
