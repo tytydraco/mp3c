@@ -24,6 +24,8 @@ CONVERTERS_VIDEO=(
     "convert_video_uid0005"                         # AMV.
     "convert_video_uid0005_mjpeg_avi"               # AVI, experimental.
     "convert_video_uid0006"
+    "convert_video_uid0007"
+    "convert_video_uid0008"
 )
 
 export PRESERVE_ORIGINAL
