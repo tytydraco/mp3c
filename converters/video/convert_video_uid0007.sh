@@ -38,10 +38,10 @@ function convert_video_uid0007() {
     else
         ffmpeg_map_args=(
             -f lavfi                                                                                                                                    # Virtual audio device.
-            -i "anullsrc=channel_layout=stereo:sample_rate=16000"                                                                                       # 16 kHz silent audio.
+            -i "anullsrc=channel_layout=stereo:sample_rate=8000"                                                                                       # 16 kHz silent audio.
             -map 0:v:0                                                                                                                                  # Choose first video stream.
             -map 1:a                                                                                                                                    # Include silent audio.
-            -ar:a 16000                                                                                                                                 # 16 kHz audio rate.
+            -ar:a 8000                                                                                                                                 # 16 kHz audio rate.
             -shortest                                                                                                                                   # Stop encoding when video stream ends.
         )
     fi
