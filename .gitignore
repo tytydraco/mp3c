@@ -1,2 +1,3 @@
 docker_out/
 config.sh
+stress_test_files/
