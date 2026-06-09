@@ -20,7 +20,7 @@ function convert_video_uid0003() {
         -n                                                                                                                                              # Do not replace existing files.
         -f avi                                                                                                                                          # AVI container.
         -c:v mjpeg                                                                                                                                      # MJPEG codec.
-        -filter:v "scale=$size:force_original_aspect_ratio=decrease,pad=$size:(ow-iw)/2:(oh-ih)/2:black,transpose=clock:passthrough=portrait,vflip"     # Contain within size, preserve aspect ratio, pad, pre-rotate clockwise (portrait bypass), flip vertically.
+        -filter:v "scale=$size:force_original_aspect_ratio=increase,crop=$size:(iw-ow)/2:(ih-oh)/2,transpose=clock:passthrough=portrait,vflip"          # Contain within size, preserve aspect ratio, crop, pre-rotate clockwise (portrait bypass), flip vertically.
         -pix_fmt:v yuvj420p                                                                                                                             # Full range pixel format.
         -fpsmax:v 30                                                                                                                                    # Match original source FPS.
         -q:v 0                                                                                                                                          # Lossless quality.

@@ -47,15 +47,16 @@ function convert_video_uid0005() {
     fps="$(fps_ceil "$input_file")"
     block_size="$((22050 / fps))"
 
+    local size="128:128"
     local ffmpeg_args=(
-        -n                                                                      # Do not replace existing files.
-        -f amv                                                                  # AMV container.
-        -strict:v experimental                                                  # Allow non-standard scaling.
-        -c:v amv                                                                # AMV codec.
-        -filter:v "scale=128:128:force_original_aspect_ratio=decrease"          # Contain within size, preserve aspect ratio.
-        -r:v "$fps"                                                             # Closest allowed ceiling frame rate.
-        -q:v 0                                                                  # Lossless quality.
-        -block_size:a "$block_size"                                             # Corresponding audio block size.
+        -n                                                                                              # Do not replace existing files.
+        -f amv                                                                                          # AMV container.
+        -strict:v experimental                                                                          # Allow non-standard scaling.
+        -c:v amv                                                                                        # AMV codec.
+        -filter:v "scale=$size:force_original_aspect_ratio=increase,crop=$size:(iw-ow)/2:(ih-oh)/2"     # Contain within size, preserve aspect ratio, crop.
+        -r:v "$fps"                                                                                     # Closest allowed ceiling frame rate.
+        -q:v 0                                                                                          # Lossless quality.
+        -block_size:a "$block_size"                                                                     # Corresponding audio block size.
     )
 
     local ffmpeg_map_args=()

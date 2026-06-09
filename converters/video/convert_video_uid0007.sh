@@ -17,15 +17,15 @@ function convert_video_uid0007() {
 
     local size="'if(gt(ih, iw), 128, 160)':'if(gt(ih, iw), 160, 128)'"
     local ffmpeg_args=(
-        -n                                                                                                                                              # Do not replace existing files.
-        -f avi                                                                                                                                          # AVI container.
-        -c:v mjpeg                                                                                                                                      # MJPEG codec.
-        -filter:v "scale=$size:force_original_aspect_ratio=decrease,pad=$size:(ow-iw)/2:(oh-ih)/2:black,transpose=clock:passthrough=portrait,vflip"     # Contain within size, preserve aspect ratio, pad, pre-rotate clockwise (portrait bypass), flip vertically.
-        -pix_fmt:v yuvj420p                                                                                                                             # Full range pixel format.
-        -fpsmax:v 30                                                                                                                                    # Match original source FPS.
-        -q:v 0                                                                                                                                          # Lossless quality.
-        -c:a pcm_s16le                                                                                                                                  # 16-bit PCM audio codec.
-        -ac:a 2                                                                                                                                         # Stereo audio.
+        -n                                                                                                                                          # Do not replace existing files.
+        -f avi                                                                                                                                      # AVI container.
+        -c:v mjpeg                                                                                                                                  # MJPEG codec.
+        -filter:v "scale=$size:force_original_aspect_ratio=increase,crop=$size:(iw-ow)/2:(ih-oh)/2,transpose=clock:passthrough=portrait,vflip"      # Contain within size, preserve aspect ratio, crop, pre-rotate clockwise (portrait bypass), flip vertically.
+        -pix_fmt:v yuvj420p                                                                                                                         # Full range pixel format.
+        -fpsmax:v 30                                                                                                                                # Match original source FPS.
+        -q:v 0                                                                                                                                      # Lossless quality.
+        -c:a pcm_s16le                                                                                                                              # 16-bit PCM audio codec.
+        -ac:a 2                                                                                                                                     # Stereo audio.
     )
 
     local ffmpeg_map_args=()

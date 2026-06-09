@@ -20,9 +20,9 @@ function convert_video_uid0001() {
         -n                                                                                                                                      # Do not replace existing files.
         -f avi                                                                                                                                  # AVI container.
         -c:v libx264                                                                                                                            # H.264 codec.
-        -x264-params "ipratio=1:aq-mode=0:rc-lookahead=0"                                                                                                # Auto-variance AQ for dark scenes.
+        -x264-params "ipratio=1:aq-mode=0:rc-lookahead=0"                                                                                       # Disable auto-variance AQ and configure for intra-frame.
         -profile:v baseline                                                                                                                     # H.264 baseline profile.
-        -filter:v "scale=$size:force_original_aspect_ratio=decrease,pad=$size:(ow-iw)/2:(oh-ih)/2:black,transpose=cclock:passthrough=portrait"  # Contain within size, preserve aspect ratio, pad, pre-rotate counter-clockwise (portrait bypass).
+        -filter:v "scale=$size:force_original_aspect_ratio=increase,crop=$size:(iw-ow)/2:(ih-oh)/2,transpose=cclock:passthrough=portrait"       # Contain within size, preserve aspect ratio, crop, pre-rotate counter-clockwise (portrait bypass).
         -bsf:v "filter_units=remove_types=6"                                                                                                    # Remove SEI.
         -pix_fmt:v yuvj420p                                                                                                                     # Full range pixel format.
         -crf:v 16                                                                                                                               # Target consistent quality.
