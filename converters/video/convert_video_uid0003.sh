@@ -15,6 +15,24 @@ function convert_video_uid0003() {
             "$1" | grep -q .
     }
 
+    function fps_ceil() {
+        local fps_max="30"
+        local fps_original
+
+        fps_original="$(ffprobe \
+            -v error \
+            -select_streams v:0 \
+            -show_entries "stream=avg_frame_rate" \
+            -of csv=p=0 \
+            "$1" | awk -F '/' '{ if ($2) print $1 / $2; else print $1 }')"
+        fps_original="${fps_original:-"$fps_max"}"
+
+        echo $(( fps_original > fps_max ? fps_max : fps_original ))
+    }
+
+    local fps
+    fps="$(fps_ceil "$input_file")"
+
     local size="'if(gt(ih, iw), 128, 160)':'if(gt(ih, iw), 160, 128)'"
     local ffmpeg_args=(
         -n                                                                                                                                              # Do not replace existing files.
@@ -22,7 +40,7 @@ function convert_video_uid0003() {
         -c:v mjpeg                                                                                                                                      # MJPEG codec.
         -filter:v "scale=$size:force_original_aspect_ratio=increase,crop=$size:(iw-ow)/2:(ih-oh)/2,transpose=clock:passthrough=portrait,vflip"          # Contain within size, preserve aspect ratio, crop, pre-rotate clockwise (portrait bypass), flip vertically.
         -pix_fmt:v yuvj420p                                                                                                                             # Full range pixel format.
-        -fpsmax:v 30                                                                                                                                    # Match original source FPS.
+        -r:v "$fps"                                                                                                                                     # Match original source FPS.
         -q:v 0                                                                                                                                          # Lossless quality.
         -c:a pcm_s16le                                                                                                                                  # 16-bit PCM audio codec.
         -ac:a 2                                                                                                                                         # Stereo audio.

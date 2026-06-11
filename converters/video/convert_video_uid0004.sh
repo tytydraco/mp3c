@@ -15,6 +15,24 @@ function convert_video_uid0004() {
             "$1" | grep -q .
     }
 
+    function fps_ceil() {
+        local fps_max="30"
+        local fps_original
+
+        fps_original="$(ffprobe \
+            -v error \
+            -select_streams v:0 \
+            -show_entries "stream=avg_frame_rate" \
+            -of csv=p=0 \
+            "$1" | awk -F '/' '{ if ($2) print $1 / $2; else print $1 }')"
+        fps_original="${fps_original:-"$fps_max"}"
+
+        echo $(( fps_original > fps_max ? fps_max : fps_original ))
+    }
+
+    local fps
+    fps="$(fps_ceil "$input_file")"
+
     local size="'if(gt(ih, iw), 240, 320)':'if(gt(ih, iw), 320, 240)'"
     local ffmpeg_args=( 
         -n                                                                                                                                      # Do not replace existing files.
@@ -26,7 +44,7 @@ function convert_video_uid0004() {
         -bsf:v "filter_units=remove_types=6"                                                                                                    # Remove SEI.
         -pix_fmt:v yuvj420p                                                                                                                     # Full range pixel format.
         -crf:v 20                                                                                                                               # Target consistent quality.
-        -fpsmax:v 30                                                                                                                            # Match original source FPS.
+        -r:v "$fps"                                                                                                                             # Match original source FPS.
         -qmin:v 20                                                                                                                              # Limit I-frame complexity.
         -sc_threshold:v 0                                                                                                                       # Disable scene-cut insertions.
         -c:a pcm_s16le                                                                                                                          # 16-bit PCM audio codec.
