@@ -27,7 +27,8 @@ function convert_video_uid0007() {
             "$1" | awk -F '/' '{ if ($2) print $1 / $2; else print $1 }')"
         fps_original="${fps_original:-"$fps_max"}"
 
-        echo $(( fps_original > fps_max ? fps_max : fps_original ))
+        awk -v fps="$fps_original" -v max="$fps_max" \
+            'BEGIN { if (fps > max) print max; else print fps }'
     }
 
     local fps
