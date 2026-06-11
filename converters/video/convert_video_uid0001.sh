@@ -28,6 +28,7 @@ function convert_video_uid0001() {
         -crf:v 20                                                                                                                               # Target consistent quality.
         -fpsmax:v 30                                                                                                                            # Match original source FPS.
         -qmin:v 20                                                                                                                              # Limit I-frame complexity.                                                                                                                   # Disable scene-cut.
+        -sc_threshold:v 0                                                                                                                       # Disable scene-cut insertions.
         -c:a pcm_s16le                                                                                                                          # 16-bit PCM audio codec.
         -ac:a 1                                                                                                                                 # Mono audio.
     )
