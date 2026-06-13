@@ -19,7 +19,7 @@ converter if you want optimal playback for a specific device.
 A `Dockerfile` is bundled for dependency management. `docker.sh` can be used to
 build the image and start the conversion process. `config.sh` will be
 bind-mounted so that the image does not need to be rebuilt when the config
-changes. The output folder will be copied to `docker_out`.
+changes. The working folder is shared with the docker container.
 
 - `./docker.sh build`: Only needs to be run once.
 - `./docker.sh run`: Executes `main.sh` and starts the program.

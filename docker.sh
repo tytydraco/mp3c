@@ -15,8 +15,8 @@ case "$1" in
             --interactive \
             --tty \
             --volume "$SCRIPT_DIR/config.sh:/app/config.sh:ro" \
+            --volume "$SCRIPT_DIR/working/:/app/working/:rw" \
             mp3c:latest
-        docker cp mp3c:/app/working docker_out
         docker rm -f mp3c
         ;;
     clean)
