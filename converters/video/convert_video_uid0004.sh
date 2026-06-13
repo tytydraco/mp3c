@@ -46,6 +46,7 @@ function convert_video_uid0004() {
         -pix_fmt:v yuvj420p                                                                                                                     # Full range pixel format.
         -crf:v 20                                                                                                                               # Target consistent quality.
         -r:v "$fps"                                                                                                                             # Match original source FPS.
+        -g:v 10                                                                                                                                 # Short GOP for better disposable P-frame prediction.
         -qmin:v 20                                                                                                                              # Limit I-frame complexity.
         -sc_threshold:v 0                                                                                                                       # Disable scene-cut insertions.
         -c:a pcm_s16le                                                                                                                          # 16-bit PCM audio codec.
