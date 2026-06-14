@@ -55,7 +55,6 @@ function convert_video_uid0005() {
         -c:v amv                                                                                        # AMV codec.
         -filter:v "scale=$size:force_original_aspect_ratio=increase,crop=$size:(iw-ow)/2:(ih-oh)/2"     # Contain within size, preserve aspect ratio, crop.
         -r:v "$fps"                                                                                     # Closest allowed ceiling frame rate.
-        -q:v 0                                                                                          # Lossless quality.
         -block_size:a "$block_size"                                                                     # Corresponding audio block size.
     )
 
