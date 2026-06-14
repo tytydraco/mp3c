@@ -51,7 +51,6 @@ function convert_video_uid0005() {
     local ffmpeg_args=(
         -n                                                                                              # Do not replace existing files.
         -f amv                                                                                          # AMV container.
-        -strict:v experimental                                                                          # Allow non-standard scaling.
         -c:v amv                                                                                        # AMV codec.
         -filter:v "scale=$size:force_original_aspect_ratio=increase,crop=$size:(iw-ow)/2:(ih-oh)/2"     # Contain within size, preserve aspect ratio, crop.
         -r:v "$fps"                                                                                     # Closest allowed ceiling frame rate.
