@@ -44,7 +44,6 @@ function convert_video_uid0004() {
         -filter:v "scale=$size:force_original_aspect_ratio=increase,crop=$size:(iw-ow)/2:(ih-oh)/2,transpose=cclock:passthrough=portrait"       # Contain within size, preserve aspect ratio, crop, pre-rotate counter-clockwise (portrait bypass).
         -bsf:v "filter_units=remove_types=6"                                                                                                    # Remove SEI.
         -pix_fmt:v yuvj420p                                                                                                                     # Full range pixel format.
-        -crf:v 20                                                                                                                               # Target consistent quality.
         -r:v "$fps"                                                                                                                             # Match original source FPS.
         -g:v 10                                                                                                                                 # Short GOP for better disposable P-frame prediction.
         -qmin:v 20                                                                                                                              # Limit I-frame complexity.
