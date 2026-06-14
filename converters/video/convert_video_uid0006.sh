@@ -15,9 +15,11 @@ function convert_video_uid0006() {
         -c:v libx264                                                                                                    # H.264 codec.
         -filter:v "scale=$size:force_original_aspect_ratio=decrease:force_divisible_by=2:in_range=auto:out_range=tv"    # Contain within size, preserve aspect ratio, ensure even lengths, ensure TV range pixel format.
         -pix_fmt:v yuv420p                                                                                              # TV range pixel format.
+        -crf:v 32
         -fpsmax:v 30                                                                                                    # Match original source FPS.
         -c:a aac                                                                                                        # AAC audio codec.
         -profile:a aac_low                                                                                              # AAC low profile.
+        -t 60
     )
 
     ffmpeg \
