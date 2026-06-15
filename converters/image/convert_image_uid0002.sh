@@ -9,7 +9,8 @@ function convert_image_uid0002() {
     local size="240x240"
     local convert_args=(
         -interlace none     # Remove interlace.
-        -rotate "-90>"      # Rotate if needed.
+        -auto-orient        # Rotate according to EXIF data.
+        -rotate "-90>"      # Rotate counter-clockwise if landscape.
         -resize "$size"     # Contain within size.
     )
 

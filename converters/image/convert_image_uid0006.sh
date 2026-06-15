@@ -6,10 +6,11 @@ function convert_image_uid0006() {
     local input_file="$1"
     local output_file="${input_file%.*}.uid0006.jpg"
 
+    local size="1340x1340"
     local convert_args=(
-        -interlace none         # Remove interlace.
-        -auto-orient            # Rotate if needed.
-        -resize "1340x1340>"    # Contain within size or smaller.
+        -interlace none     # Remove interlace.
+        -auto-orient        # Rotate according to EXIF data.
+        -resize "$size>"    # Contain within size or smaller.
     )
 
     convert \
