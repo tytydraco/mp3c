@@ -18,7 +18,6 @@ function convert_video_uid0006() {
         -crf:v 32                                                                                                       # Target improved compression.
         -fpsmax:v 30                                                                                                    # Match original source FPS.
         -c:a aac                                                                                                        # AAC audio codec.
-        -profile:a aac_low                                                                                              # AAC low profile.
     )
 
     ffmpeg \
