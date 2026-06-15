@@ -41,7 +41,7 @@ function convert_video_uid0001() {
         -c:v libx264                                                                                                                            # H.264 codec.
         -x264-params "mvrange=16:merange=16"                                                                                                    # Clamp motion-vector range.
         -profile:v baseline                                                                                                                     # H.264 baseline profile.
-        -filter:v "scale=$size:force_original_aspect_ratio=increase,crop=$size:(iw-ow)/2:(ih-oh)/2,transpose=cclock:passthrough=portrait"       # Contain within size, preserve aspect ratio, crop, pre-rotate counter-clockwise (portrait bypass).
+        -filter:v "scale=$size:force_original_aspect_ratio=increase,crop=$size:(iw-ow)/2:(ih-oh)/2,transpose=cclock:passthrough=portrait"       # Contain within size, preserve aspect ratio, crop, pre-rotate counter-clockwise if landscape.
         -bsf:v "filter_units=remove_types=6"                                                                                                    # Remove SEI.
         -pix_fmt:v yuvj420p                                                                                                                     # Full range pixel format.
         -r:v "$fps"                                                                                                                             # Match original source FPS.

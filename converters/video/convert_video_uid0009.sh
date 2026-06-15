@@ -52,7 +52,7 @@ function convert_video_uid0009() {
         -n                                                                                                                                  # Do not replace existing files.
         -f amv                                                                                                                              # AMV container.
         -c:v amv                                                                                                                            # AMV codec.
-        -filter:v "scale=$size:force_original_aspect_ratio=increase,crop=$size:(iw-ow)/2:(ih-oh)/2,transpose=cclock:passthrough=landscape"  # Contain within size, preserve aspect ratio, crop, pre-rotate counter-clockwise (landscape bypass).
+        -filter:v "scale=$size:force_original_aspect_ratio=increase,crop=$size:(iw-ow)/2:(ih-oh)/2,transpose=cclock:passthrough=landscape"  # Contain within size, preserve aspect ratio, crop, pre-rotate counter-clockwise if portrait.
         -r:v "$fps"                                                                                                                         # Closest allowed ceiling frame rate.
         -block_size:a "$block_size"                                                                                                         # Corresponding audio block size.
     )
