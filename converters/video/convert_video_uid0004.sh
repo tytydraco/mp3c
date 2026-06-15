@@ -34,7 +34,7 @@ function convert_video_uid0004() {
     local fps
     fps="$(fps_ceil "$input_file")"
 
-    local size="'if(gt(ih, iw), 240, 320)':'if(gt(ih, iw), 320, 240)'"
+    local size="'if(gt(iw, ih), 320, 240)':'if(gt(iw, ih), 240, 320)'"
     local ffmpeg_args=( 
         -n                                                                                                                                      # Do not replace existing files.
         -f avi                                                                                                                                  # AVI container.

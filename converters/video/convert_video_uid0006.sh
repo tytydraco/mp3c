@@ -6,7 +6,7 @@ function convert_video_uid0006() {
     local input_file="$1"
     local output_file="${input_file%.*}.uid0006.mp4"
 
-    local size="'if(gt(ih, iw), -2, min(1340, iw))':'if(gt(ih, iw), min(800, ih), -2)'"
+    local size="'if(gt(iw, ih), min(1340, iw), -2)':'if(gt(iw, ih), -2, min(800, ih))'"
     local ffmpeg_args=(
         -n                                                                                                              # Do not replace existing files.
         -f mp4                                                                                                          # MP4 container.
