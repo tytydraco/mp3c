@@ -7,7 +7,8 @@ function convert_video_uid0005_mjpeg_avi() {
     local input_file="$1"
     local output_file="${input_file%.*}.uid0005.avi"
 
-    local tmpdir="$(mktemp -d)"
+    local tmpdir
+    tmpdir="$(mktemp -d)"
 
     function has_audio() {
         ffprobe \
@@ -36,41 +37,41 @@ function convert_video_uid0005_mjpeg_avi() {
     local ffmpeg_map_args=()
     if has_audio "$input_file"; then
         ffmpeg_map_args=(
-            -map 0:v:0                                              # Choose first video stream.
-            -map 0:a:0                                              # Choose first audio stream.
-            -ar:a 22050                                             # 22.05 kHz audio rate.
+            -map 0:v:0
+            -map 0:a:0
+            -ar:a 22050
         )
     else
         ffmpeg_map_args=(
-            -f lavfi                                                # Virtual audio device.
-            -i "anullsrc=channel_layout=mono:sample_rate=22050"     # 22.05 kHz silent audio.
-            -map 0:v:0                                              # Choose first video stream.
-            -map 1:a                                                # Include silent audio.
-            -ar:a 22050                                             # 22.05 kHz audio rate.
-            -shortest                                               # Stop encoding when video stream ends.
+            -f lavfi
+            -i "anullsrc=channel_layout=mono:sample_rate=22050"
+            -map 0:v:0
+            -map 1:a
+            -ar:a 22050
+            -shortest
         )
     fi
 
     local vf="scale=128:128:force_original_aspect_ratio=decrease,pad=128:128:(ow-iw)/2:(oh-ih)/2:black,fps=542/25"
     local ffmpeg_p1_args=(
-        -y                      # Replace existing files.
-        -c:v mjpeg              # MJPEG codec.
-        -filter:v "$vf"         # Contain within size, preserve aspect ratio, lock FPS.
-        -pix_fmt:v yuvj420p     # yuvj420p pixel format.
-        -c:a adpcm_ima_wav      # IMA ADPCM codec.
-        -ac:a 1                 # Mono audio.
-        -ar:a 22050             # 22.05 kHz audio rate.
-        -block_size:a 512       # 512 byte block size.
+        -y
+        -c:v mjpeg
+        -filter:v "$vf"
+        -pix_fmt:v yuvj420p
+        -c:a adpcm_ima_wav
+        -ac:a 1
+        -ar:a 22050
+        -block_size:a 512
     )
     local ffmpeg_p2_args=(
-        -y                      # Replace existing files.
-        -f rawvideo             # Raw video container.
-        -c:v rawvideo           # Raw video codec.
-        -filter:v "$vf"         # Contain within size, preserve aspect ratio, lock FPS.
-        -pix_fmt:v yuv420p      # yuv420p pixel format.
-        -an                     # No audio stream.
+        -y
+        -f rawvideo
+        -c:v rawvideo
+        -filter:v "$vf"
+        -pix_fmt:v yuv420p
+        -an
     )
-    
+
     ffmpeg \
         -i "$input_file" \
         "${ffmpeg_map_args[@]}" \

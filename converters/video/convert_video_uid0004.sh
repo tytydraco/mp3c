@@ -35,38 +35,43 @@ function convert_video_uid0004() {
     fps="$(fps_ceil "$input_file")"
 
     local size="'if(gt(iw, ih), 320, 240)':'if(gt(iw, ih), 240, 320)'"
-    local ffmpeg_args=( 
-        -n                                                                                                                                      # Do not replace existing files.
-        -f avi                                                                                                                                  # AVI container.
-        -c:v libx264                                                                                                                            # H.264 codec.
-        -x264-params "mvrange=16:merange=16"                                                                                                    # Clamp motion-vector range.
-        -profile:v baseline                                                                                                                     # H.264 baseline profile.
-        -filter:v "scale=$size:force_original_aspect_ratio=increase,crop=$size:(iw-ow)/2:(ih-oh)/2,transpose=cclock:passthrough=portrait"       # Contain within size, preserve aspect ratio, crop, pre-rotate counter-clockwise if landscape.
-        -bsf:v "filter_units=remove_types=6"                                                                                                    # Remove SEI.
-        -pix_fmt:v yuvj420p                                                                                                                     # Full range pixel format.
-        -r:v "$fps"                                                                                                                             # Match original source FPS.
-        -g:v 10                                                                                                                                 # Short GOP for better disposable P-frame prediction.
-        -qmin:v 20                                                                                                                              # Limit I-frame complexity.
-        -sc_threshold:v 0                                                                                                                       # Disable scene-cut insertions.
-        -c:a pcm_s16le                                                                                                                          # 16-bit PCM audio codec.
-        -ac:a 1                                                                                                                                 # Mono audio.
+    local ffmpeg_args=(
+        -n
+        -f avi
+        -c:v libx264
+        -x264-params "mvrange=16:merange=16"
+        -profile:v baseline
+        -filter:v
+        "
+            scale=$size:force_original_aspect_ratio=increase,
+            crop=$size:(iw-ow)/2:(ih-oh)/2,
+            transpose=cclock:passthrough=portrait
+        "
+        -bsf:v "filter_units=remove_types=6"
+        -pix_fmt:v yuvj420p
+        -r:v "$fps"
+        -g:v 10
+        -qmin:v 20
+        -sc_threshold:v 0
+        -c:a pcm_s16le
+        -ac:a 1
     )
 
     local ffmpeg_map_args=()
     if has_audio "$input_file"; then
         ffmpeg_map_args=(
-            -map 0:v:0                                                                                                                          # Choose first video stream.
-            -map 0:a:0                                                                                                                          # Choose first audio stream.
-            -ar:a 22050                                                                                                                         # 22.05 kHz audio rate.
+            -map 0:v:0
+            -map 0:a:0
+            -ar:a 22050
         )
     else
         ffmpeg_map_args=(
-            -f lavfi                                                                                                                            # Virtual audio device.
-            -i "anullsrc=channel_layout=mono:sample_rate=8000"                                                                                  # 8 kHz silent audio.
-            -map 0:v:0                                                                                                                          # Choose first video stream.
-            -map 1:a                                                                                                                            # Include silent audio.
-            -ar:a 8000                                                                                                                          # 8 kHz audio rate.
-            -shortest                                                                                                                           # Stop encoding when video stream ends.
+            -f lavfi
+            -i "anullsrc=channel_layout=mono:sample_rate=8000"
+            -map 0:v:0
+            -map 1:a
+            -ar:a 8000
+            -shortest
         )
     fi
 

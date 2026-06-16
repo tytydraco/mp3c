@@ -36,32 +36,38 @@ function convert_video_uid0007() {
 
     local size="'if(gt(iw, ih), 160, 128)':'if(gt(iw, ih), 128, 160)'"
     local ffmpeg_args=(
-        -n                                                                                                                                          # Do not replace existing files.
-        -f avi                                                                                                                                      # AVI container.
-        -c:v mjpeg                                                                                                                                  # MJPEG codec.
-        -filter:v "scale=$size:force_original_aspect_ratio=increase,crop=$size:(iw-ow)/2:(ih-oh)/2,transpose=clock:passthrough=portrait,vflip"      # Contain within size, preserve aspect ratio, crop, pre-rotate clockwise if landscape, flip vertically.
-        -pix_fmt:v yuvj420p                                                                                                                         # Full range pixel format.
-        -r:v "$fps"                                                                                                                                 # Match original source FPS.
-        -q:v 0                                                                                                                                      # Lossless quality.
-        -c:a pcm_s16le                                                                                                                              # 16-bit PCM audio codec.
-        -ac:a 2                                                                                                                                     # Stereo audio.
+        -n
+        -f avi
+        -c:v mjpeg
+        -filter:v
+        "
+            scale=$size:force_original_aspect_ratio=increase,
+            crop=$size:(iw-ow)/2:(ih-oh)/2,
+            transpose=clock:passthrough=portrait,
+            vflip
+        "
+        -pix_fmt:v yuvj420p
+        -r:v "$fps"
+        -q:v 0
+        -c:a pcm_s16le
+        -ac:a 2
     )
 
     local ffmpeg_map_args=()
     if has_audio "$input_file"; then
         ffmpeg_map_args=(
-            -map 0:v:0                                                                                                                                  # Choose first video stream.
-            -map 0:a:0                                                                                                                                  # Choose first audio stream.
-            -ar:a 22050                                                                                                                                 # 22.05 kHz audio rate.
+            -map 0:v:0
+            -map 0:a:0
+            -ar:a 22050
         )
     else
         ffmpeg_map_args=(
-            -f lavfi                                                                                                                                    # Virtual audio device.
-            -i "anullsrc=channel_layout=stereo:sample_rate=8000"                                                                                       # 16 kHz silent audio.
-            -map 0:v:0                                                                                                                                  # Choose first video stream.
-            -map 1:a                                                                                                                                    # Include silent audio.
-            -ar:a 8000                                                                                                                                 # 16 kHz audio rate.
-            -shortest                                                                                                                                   # Stop encoding when video stream ends.
+            -f lavfi
+            -i "anullsrc=channel_layout=stereo:sample_rate=8000"
+            -map 0:v:0
+            -map 1:a
+            -ar:a 8000
+            -shortest
         )
     fi
 

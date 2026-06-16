@@ -8,9 +8,9 @@ function convert_image_uid0006() {
 
     local size="1340x1340"
     local convert_args=(
-        -interlace none     # Remove interlace.
-        -auto-orient        # Rotate according to EXIF data.
-        -resize "$size>"    # Contain within size or smaller.
+        -interlace none
+        -auto-orient
+        -resize "$size>"
     )
 
     convert \

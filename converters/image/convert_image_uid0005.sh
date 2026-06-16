@@ -8,11 +8,11 @@ function convert_image_uid0005() {
 
     local size="128x128"
     local convert_args=(
-        -interlace none     # Remove interlace.
-        -auto-orient        # Rotate according to EXIF data.
-        -gravity center     # Center within canvas.
-        -resize "$size^"    # Fill to size.
-        -extent "$size"     # Full canvas size.
+        -interlace none
+        -auto-orient
+        -gravity center
+        -resize "$size^"
+        -extent "$size"
     )
 
     convert \

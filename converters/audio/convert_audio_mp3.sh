@@ -9,9 +9,9 @@ function convert_audio_mp3() {
     [[ "$input_file" == "$output_file" ]] && return 0
 
     local ffmpeg_args=(
-        -n          # Do not replace existing files.
-        -f mp3      # MP3 format.
-        -q:a 2      # Target transparent quality.
+        -n
+        -f mp3
+        -q:a 2
     )
 
     ffmpeg \

@@ -9,10 +9,10 @@ function convert_audio_adts_aac() {
     [[ "$input_file" == "$output_file" ]] && return 0
 
     local ffmpeg_args=(
-        -n          # Do not replace existing files.
-        -f adts     # ADTS format.
-        -c:a aac    # AAC codec.
-        -b:a 256k   # Target average bitrate.
+        -n
+        -f adts
+        -c:a aac
+        -b:a 256k
     )
 
     ffmpeg \

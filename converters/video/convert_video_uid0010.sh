@@ -22,7 +22,6 @@ function convert_video_uid0010() {
         local fps_original
         local fps_nearest
 
-        # Find valid FPS within [9, 30].
         readarray -t fps_allowed < <(seq 9 30 | awk '22050 % $1 == 0 { print $1 }')
         fps_max="${fps_allowed[-1]}"
 
@@ -37,7 +36,7 @@ function convert_video_uid0010() {
             "${fps_allowed[@]}" | awk \
                 -v fps="$fps_original" \
                 '$1 >= fps { print $1; exit }')"
-        
+
         echo "${fps_nearest:-"$fps_max"}"
     }
 
@@ -49,27 +48,32 @@ function convert_video_uid0010() {
 
     local size="'if(gt(iw, ih), 160, 128)':'if(gt(iw, ih), 128, 160)'"
     local ffmpeg_args=(
-        -n                                                                                                                                  # Do not replace existing files.
-        -f amv                                                                                                                              # AMV container.
-        -c:v amv                                                                                                                            # AMV codec.
-        -filter:v "scale=$size:force_original_aspect_ratio=increase,crop=$size:(iw-ow)/2:(ih-oh)/2,transpose=cclock:passthrough=landscape"  # Contain within size, preserve aspect ratio, crop, pre-rotate counter-clockwise if portrait.
-        -r:v "$fps"                                                                                                                         # Closest allowed ceiling frame rate.
-        -block_size:a "$block_size"                                                                                                         # Corresponding audio block size.
+        -n
+        -f amv
+        -c:v amv
+        -filter:v
+        "
+            scale=$size:force_original_aspect_ratio=increase,
+            crop=$size:(iw-ow)/2:(ih-oh)/2,
+            transpose=cclock:passthrough=landscape
+        "
+        -r:v "$fps"
+        -block_size:a "$block_size"
     )
 
     local ffmpeg_map_args=()
     if has_audio "$input_file"; then
         ffmpeg_map_args=(
-            -map 0:v:0                                                                                                                      # Choose first video stream.
-            -map 0:a:0                                                                                                                      # Choose first audio stream.
+            -map 0:v:0
+            -map 0:a:0
         )
     else
         ffmpeg_map_args=(
-            -f lavfi                                                                                                                        # Virtual audio device.
-            -i "anullsrc=channel_layout=mono:sample_rate=22050"                                                                             # 22.05 kHz silent audio (minimum).
-            -map 0:v:0                                                                                                                      # Choose first video stream.
-            -map 1:a                                                                                                                        # Include silent audio.
-            -shortest                                                                                                                       # Stop encoding when video stream ends.
+            -f lavfi
+            -i "anullsrc=channel_layout=mono:sample_rate=22050"
+            -map 0:v:0
+            -map 1:a
+            -shortest
         )
     fi
 
