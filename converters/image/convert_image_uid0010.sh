@@ -11,7 +11,9 @@ function convert_image_uid0010() {
         -interlace none
         -auto-orient
         -rotate "90>"
-        -resize "$size"
+        -resize "$size^"
+        -gravity center
+        -extent "$size"
     )
 
     convert \
