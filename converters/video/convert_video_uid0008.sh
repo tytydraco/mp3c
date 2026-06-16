@@ -21,7 +21,7 @@ function convert_video_uid0008() {
             crop=$crop
         "
         -pix_fmt:v yuv420p
-        -crf:v 32
+        -crf:v 36
         -fpsmax:v 30
         -c:a aac
     )

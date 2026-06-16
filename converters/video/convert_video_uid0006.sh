@@ -18,7 +18,7 @@ function convert_video_uid0006() {
             scale=$size:force_original_aspect_ratio=decrease:force_divisible_by=2:in_range=auto:out_range=tv
         "
         -pix_fmt:v yuv420p
-        -crf:v 32
+        -crf:v 36
         -fpsmax:v 30
         -c:a aac
     )
