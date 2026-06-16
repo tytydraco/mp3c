@@ -31,6 +31,7 @@ CONVERTERS_VIDEO=(
     "convert_video_uid0008"
     "convert_video_uid0009"
     "convert_video_uid0010"
+    "convert_video_uid0011"
 )
 
 export PRESERVE_ORIGINAL
