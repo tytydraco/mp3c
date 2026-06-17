@@ -16,6 +16,7 @@ CONVERTERS_IMAGE=(
     "convert_image_uid0008"
     "convert_image_uid0009"
     "convert_image_uid0010"
+    "convert_image_uid0011"
 )
 CONVERTERS_TEXT=(
     "convert_text_txt"
