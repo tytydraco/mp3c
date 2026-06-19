@@ -41,8 +41,6 @@ function convert_video_uid0016() {
             scale=$size:force_divisible_by=2:in_range=auto:out_range=tv,
             crop=$crop
         "
-        -movflags use_metadata_tags
-        -metadata comment="$(printf '%0100d' 0)"
         -pix_fmt:v yuv420p
         -crf:v 30
         -r:v "$fps"
