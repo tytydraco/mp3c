@@ -12,13 +12,14 @@ function convert_video_uid0017() {
         -f mp4
         -map 0:v:0
         -map 0:a:0?
-        -c:v mpeg4
+        -c:v libxvid
         -filter:v
         "
             scale=$size:force_original_aspect_ratio=increase,
             crop=$size:(iw-ow)/2:(ih-oh)/2,
             transpose=cclock:passthrough=landscape
         "
+        -q:v 4
         -c:a aac
     )
 
