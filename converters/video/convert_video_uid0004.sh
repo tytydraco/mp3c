@@ -45,7 +45,7 @@ function convert_video_uid0004() {
         "
             transpose=cclock:passthrough=portrait,
             scale=$size:force_original_aspect_ratio=increase,
-            crop=$size:(iw-ow)/2:(ih-oh)/2
+            crop=$size
         "
         -bsf:v "filter_units=remove_types=6"
         -pix_fmt:v yuvj420p

@@ -43,7 +43,7 @@ function convert_video_uid0003() {
         "
             transpose=clock:passthrough=portrait,
             scale=$size:force_original_aspect_ratio=increase,
-            crop=$size:(iw-ow)/2:(ih-oh)/2,
+            crop=$size,
             vflip
         "
         -pix_fmt:v yuvj420p
