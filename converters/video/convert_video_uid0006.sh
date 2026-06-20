@@ -34,7 +34,7 @@ function convert_video_uid0006() {
         -c:v libx264
         -filter:v
         "
-            scale=$size:force_original_aspect_ratio=decrease:force_divisible_by=2:in_range=auto:out_range=tv
+            scale=$size:force_divisible_by=2:in_range=auto:out_range=tv
         "
         -pix_fmt:v yuv420p
         -crf:v 36
