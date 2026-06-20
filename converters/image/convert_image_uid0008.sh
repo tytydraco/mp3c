@@ -7,13 +7,13 @@ function convert_image_uid0008() {
     local output_file="${input_file%.*}.uid0008.jpg"
 
     local size="640x480"
-    local convert_args=(
+     local convert_args=(
         -interlace none
         -auto-orient
         -rotate "-90<"
-        -resize "$size^>"
+        -resize "$size^"
         -gravity center
-        -extent "$size<"
+        -extent "$size"
     )
 
     convert \

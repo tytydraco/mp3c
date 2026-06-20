@@ -6,7 +6,7 @@ function convert_image_uid0009() {
     local input_file="$1"
     local output_file="${input_file%.*}.uid0009.jpg"
 
-    local size="240x340"
+    local size="240x320"
     local convert_args=(
         -interlace none
         -auto-orient
