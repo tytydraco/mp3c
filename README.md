@@ -15,6 +15,7 @@ A limiting criteria for device selecting is necessary to prevent redundancy.
 
 Example criteria for compatible devices:
 
+- Devices that do not support software rotation
 - Devices with a fixed video player resolution
 - Devices with very basic video or image viewing modes (no zoom, fill, crop, etc.)
 - Devices that require highly specialized conversion steps
@@ -22,9 +23,17 @@ Example criteria for compatible devices:
 
 Example criteria of incompatible devices:
 
+- Devices that can play content without needing conversion
+- Devices that support software rotation
 - Devices that can already play most video or image formats and types
 - Devices with advanced video or image viewing modes
 - Example devices: Smartphones, tablets, laptops
+
+# General Conversion Rules
+
+- If both portrait and orientations for an image or video display correctly, choose the device's screen orientation (i.e., portrait player receives a portrait image, even if a landscape image work, too)
+- If rotation is needed or ambiguous, use the device's preferred rotation for the content. This can be determined by playing a video, or by viewing an image which has the opposite orientation of the device's screen. Most ATJ devices prefer counter-clockwise rotation, while most SL devices prefer clockwise rotation, but the rule is not always true, especially for landscape devices. If the device has a square screen, do not rotate.
+- If the device does not support zoom-to-fill for videos or images, fill the full screen size and crop the excess (cover). If the device supports zoom-to-fill, simply fit to screen size or smaller.
 
 # Usage
 
