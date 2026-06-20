@@ -34,16 +34,16 @@ function convert_video_uid0007() {
     local fps
     fps="$(fps_ceil "$input_file")"
 
-    local size="'if(gt(iw, ih), 160, 128)':'if(gt(iw, ih), 128, 160)'"
+    local size="128:160"
     local ffmpeg_args=(
         -n
         -f avi
         -c:v mjpeg
         -filter:v
         "
+            transpose=clock:passthrough=portrait,
             scale=$size:force_original_aspect_ratio=increase,
             crop=$size:(iw-ow)/2:(ih-oh)/2,
-            transpose=clock:passthrough=portrait,
             vflip
         "
         -pix_fmt:v yuvj420p
