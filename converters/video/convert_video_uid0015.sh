@@ -15,13 +15,13 @@ function convert_video_uid0015() {
             "$1" | grep -q .
     }
 
-    # Return the closest allowed ceiling frame rate for a video file.
     function fps_ceil() {
         local -a fps_allowed
         local fps_max
         local fps_original
         local fps_nearest
 
+        # Find valid FPS within [9, 30].
         readarray -t fps_allowed < <(seq 9 30 | awk '22050 % $1 == 0 { print $1 }')
         fps_max="${fps_allowed[-1]}"
 

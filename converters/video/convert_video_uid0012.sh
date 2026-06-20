@@ -6,6 +6,25 @@ function convert_video_uid0012() {
     local input_file="$1"
     local output_file="${input_file%.*}.uid0012.mp4"
 
+    function fps_ceil() {
+        local fps_max="30"
+        local fps_original
+
+        fps_original="$(ffprobe \
+            -v error \
+            -select_streams v:0 \
+            -show_entries "stream=avg_frame_rate" \
+            -of csv=p=0 \
+            "$1" | awk -F '/' '{ if ($2) print $1 / $2; else print $1 }')"
+        fps_original="${fps_original:-"$fps_max"}"
+
+        awk -v fps="$fps_original" -v max="$fps_max" \
+            'BEGIN { if (fps > max) print max; else print fps }'
+    }
+
+    local fps
+    fps="$(fps_ceil "$input_file")"
+
     local size="'if(gte(iw/ih, 4/3), -2, min(640, iw))':'if(gte(iw/ih, 4/3), min(480, ih), -2)'"
     local crop="'min(640, iw)':'min(480, ih)'"
     local ffmpeg_args=(
@@ -22,7 +41,7 @@ function convert_video_uid0012() {
         "
         -pix_fmt:v yuv420p
         -crf:v 36
-        -fpsmax:v 30
+        -r:v "$fps"
         -c:a aac
     )
 

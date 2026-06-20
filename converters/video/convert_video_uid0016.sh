@@ -7,7 +7,6 @@ function convert_video_uid0016() {
     local input_file="$1"
     local output_file="${input_file%.*}.uid0016.mp4"
 
-    # Return the closest allowed ceiling frame rate for a video file.
     function fps_ceil() {
         local fps_max="30"
         local fps_original

@@ -15,7 +15,6 @@ function convert_video_uid0005() {
             "$1" | grep -q .
     }
 
-    # Return the closest allowed ceiling frame rate for a video file.
     function fps_ceil() {
         local -a fps_allowed
         local fps_max
