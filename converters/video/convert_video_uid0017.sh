@@ -34,10 +34,11 @@ function convert_video_uid0017() {
         -c:v libxvid
         -filter:v
         "
-            scale=$size:force_original_aspect_ratio=increase,
+            scale=$size:force_original_aspect_ratio=increase:in_range=auto:out_range=tv,
             crop=$size:(iw-ow)/2:(ih-oh)/2,
             transpose=cclock:passthrough=landscape
         "
+        -pix_fmt:v yuv420p
         -q:v 4
         -r:v "$fps"
         -c:a aac
