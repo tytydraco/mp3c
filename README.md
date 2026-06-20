@@ -9,6 +9,23 @@ formats for optimal playback and quality. Many converters are already
 built in [converters](converters), but you may need to create your own
 converter if you want optimal playback for a specific device.
 
+# Devices
+
+A limiting criteria for device selecting is necessary to prevent redundancy.
+
+Example criteria for compatible devices:
+
+- Devices with a fixed video player resolution
+- Devices with very basic video or image viewing modes (no zoom, fill, crop, etc.)
+- Devices that require highly specialized conversion steps
+- Example devices: MP3 players, feature phones, handheld game systems
+
+Example criteria of incompatible devices:
+
+- Devices that can already play most video or image formats and types
+- Devices with advanced video or image viewing modes
+- Example devices: Smartphones, tablets, laptops
+
 # Usage
 
 1. Copy the [example config](config.example.sh) to [config.sh](config.sh).
