@@ -26,8 +26,7 @@ function convert_video_uid0016() {
     local fps
     fps="$(fps_ceil "$input_file")"
 
-    local size="'if(gte(iw/ih, 4/3), -2, min(320, iw))':'if(gte(iw/ih, 4/3), min(240, ih), -2)'"
-    local crop="'min(320, iw)':'min(240, ih)'"
+    local size="'min(320, iw)':'min(240, ih)'"
     local ffmpeg_args=(
         -n
         -f mp4
@@ -37,8 +36,7 @@ function convert_video_uid0016() {
         -filter:v
         "
             transpose=cclock:passthrough=landscape,
-            scale=$size:force_divisible_by=2:in_range=auto:out_range=tv,
-            crop=$crop
+            scale=$size:force_original_aspect_ratio=decrease:force_divisible_by=2:in_range=auto:out_range=tv
         "
         -pix_fmt:v yuv420p
         -crf:v 30
