@@ -13,21 +13,7 @@ converter if you want optimal playback for a specific device.
 
 A limiting criteria for device selecting is necessary to prevent redundancy.
 
-Example criteria for compatible devices:
-
-- Devices that do not support software rotation
-- Devices with a fixed video player resolution
-- Devices with very basic video or image viewing modes (no zoom, fill, crop, etc.)
-- Devices that require highly specialized conversion steps
-- Example devices: MP3 players, feature phones, handheld game systems
-
-Example criteria of incompatible devices:
-
-- Devices that can play content without needing conversion
-- Devices that support software rotation
-- Devices that can already play most video or image formats and types
-- Devices with advanced video or image viewing modes
-- Example devices: Smartphones, tablets, laptops
+> mp3c targets constrained media devices where content must be preprocessed into the device's preferred viewing orientation and resolution. Devices that already provide robust rotation, scaling, zooming, or cropping functionality are generally out of scope, though some exceptions may apply when it makes sense. We aim to avoid writing multi-case operations and instead streamline into one consistent pipeline.
 
 # General Conversion Rules
 
