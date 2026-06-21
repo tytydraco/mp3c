@@ -18,7 +18,7 @@ A limiting criteria for device selecting is necessary to prevent redundancy.
 # General Conversion Rules
 
 - If both portrait and orientations for an image or video display correctly, choose the device's screen orientation (i.e., portrait player receives a portrait image, even if a landscape image work, too).
-- If rotation is needed or ambiguous, use the device's preferred rotation for the content. This can be determined by playing a video, or by viewing an image which has the opposite orientation of the device's screen. Most ATJ devices prefer counter-clockwise rotation, while most SL devices prefer clockwise rotation, but the rule is not always true, especially for landscape devices. If the device has a square screen, do not rotate.
+- If rotation is needed or ambiguous, use the device's preferred rotation for the content. This can be determined by playing a video, or by viewing an image which has the opposite orientation of the device's screen. Most ATJ devices prefer counter-clockwise rotation, while most SL devices prefer clockwise rotation, but the rule is not always true, especially for landscape devices. If the device has a square screen, do not rotate. If intended rotation is entirely ambiguous (i.e., landscape fixed-size players), clockwise rotation is preferred.
 - Always ensure the content fills the entire screen (crop).
 
 # Usage

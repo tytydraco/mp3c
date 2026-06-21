@@ -41,7 +41,7 @@ function convert_video_uid0003() {
         -c:v mjpeg
         -filter:v
         "
-            transpose=clock:passthrough=portrait,
+            transpose=cclock:passthrough=portrait,
             scale=$size:force_original_aspect_ratio=increase,
             crop=$size,
             vflip
