@@ -35,7 +35,7 @@ function convert_video_uid0008() {
         -filter:v
         "
             transpose=cclock:passthrough=landscape,
-            scale=$size:force_original_aspect_ratio=increase,
+            scale=$size:force_original_aspect_ratio=increase:in_range=auto:out_range=tv,
             crop=$size
         "
         -pix_fmt:v yuv420p
