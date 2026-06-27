@@ -8,10 +8,7 @@ function convert_text_txt() {
 
     [[ "$input_file" == "$output_file" ]] && return 0
 
-    pandoc \
-        "$input_file" \
-        -t plain \
-        -o "$output_file"
+    ebook-convert "$input_file" "$output_file"
 }
 
 export -f convert_text_txt
