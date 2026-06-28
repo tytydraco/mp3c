@@ -50,7 +50,6 @@ function convert_video_uid0014() {
         -bsf:v "filter_units=remove_types=6"
         -pix_fmt:v yuvj420p
         -r:v "$fps"
-        -crf:v 29
         -g:v 4
         -qmin:v 20
         -c:a pcm_s16le
@@ -62,15 +61,15 @@ function convert_video_uid0014() {
         ffmpeg_map_args=(
             -map 0:v:0
             -map 0:a:0
-            -ar:a 22050
+            -ar:a 16000
         )
     else
         ffmpeg_map_args=(
             -f lavfi
-            -i "anullsrc=channel_layout=mono:sample_rate=22050"
+            -i "anullsrc=channel_layout=mono:sample_rate=16000"
             -map 0:v:0
             -map 1:a
-            -ar:a 22050
+            -ar:a 16000
             -shortest
         )
     fi
