@@ -48,7 +48,7 @@ function convert_video_uid0003() {
         "
         -pix_fmt:v yuvj420p
         -r:v "$fps"
-        -q:v 4
+        -q:v 6
         -c:a pcm_s16le
         -ac:a 2
     )
@@ -58,7 +58,7 @@ function convert_video_uid0003() {
         ffmpeg_map_args=(
             -map 0:v:0
             -map 0:a:0
-            -ar:a 16000
+            -ar:a 22050
         )
     else
         ffmpeg_map_args=(

@@ -45,6 +45,7 @@ function convert_video_uid0016() {
         -r:v "$fps"
         -c:a aac
         -ar:a 16000
+        -ac:a 1
     )
 
     ffmpeg \

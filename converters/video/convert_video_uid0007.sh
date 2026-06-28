@@ -48,7 +48,7 @@ function convert_video_uid0007() {
         "
         -pix_fmt:v yuvj420p
         -r:v "$fps"
-        -q:v 4
+        -q:v 6
         -c:a pcm_s16le
         -ac:a 2
     )
