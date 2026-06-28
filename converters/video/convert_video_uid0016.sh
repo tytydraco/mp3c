@@ -8,7 +8,7 @@ function convert_video_uid0016() {
     local output_file="${input_file%.*}.uid0016.mp4"
 
     function fps_ceil() {
-        local fps_max="30"
+        local fps_max="25"
         local fps_original
 
         fps_original="$(ffprobe \
@@ -33,6 +33,7 @@ function convert_video_uid0016() {
         -map 0:v:0
         -map 0:a:0?
         -c:v libx264
+        -x264-params "aq-mode=3"
         -filter:v
         "
             transpose=cclock:passthrough=landscape,
@@ -43,7 +44,7 @@ function convert_video_uid0016() {
         -crf:v 30
         -r:v "$fps"
         -c:a aac
-        -ar:a 22050
+        -ar:a 16000
     )
 
     ffmpeg \

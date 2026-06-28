@@ -7,7 +7,7 @@ function convert_video_uid0017() {
     local output_file="${input_file%.*}.uid0017.mp4"
 
     function fps_ceil() {
-        local fps_max="30"
+        local fps_max="25"
         local fps_original
 
         fps_original="$(ffprobe \
@@ -42,7 +42,7 @@ function convert_video_uid0017() {
         -q:v 4
         -r:v "$fps"
         -c:a aac
-        -ar:a 22050
+        -ar:a 16000
     )
 
     ffmpeg \

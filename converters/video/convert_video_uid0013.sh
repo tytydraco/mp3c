@@ -16,7 +16,7 @@ function convert_video_uid0013() {
     }
 
     function fps_ceil() {
-        local fps_max="30"
+        local fps_max="25"
         local fps_original
 
         fps_original="$(ffprobe \
@@ -58,7 +58,7 @@ function convert_video_uid0013() {
         ffmpeg_map_args=(
             -map 0:v:0
             -map 0:a:0
-            -ar:a 22050
+            -ar:a 16000
         )
     else
         ffmpeg_map_args=(

@@ -16,7 +16,7 @@ function convert_video_uid0014() {
     }
 
     function fps_ceil() {
-        local fps_max="30"
+        local fps_max="25"
         local fps_original
 
         fps_original="$(ffprobe \
@@ -39,7 +39,7 @@ function convert_video_uid0014() {
         -n
         -f avi
         -c:v libx264
-        -x264-params "mvrange=16:merange=16"
+        -x264-params "mvrange=16:merange=16:aq-mode=3"
         -profile:v baseline
         -filter:v
         "
@@ -50,9 +50,9 @@ function convert_video_uid0014() {
         -bsf:v "filter_units=remove_types=6"
         -pix_fmt:v yuvj420p
         -r:v "$fps"
-        -g:v 10
+        -crf:v 29
+        -g:v 4
         -qmin:v 20
-        -sc_threshold:v 0
         -c:a pcm_s16le
         -ac:a 1
     )
