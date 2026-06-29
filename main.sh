@@ -12,7 +12,7 @@ ATJ_AVI_ENCODER="$SCRIPT_DIR/tools/ffmpeg/atj-avi-encoder/make-atj-avi-encoder.s
 
 function source_converters() {
     while IFS= read -r -d '' lib_file; do
-        source "${lib_file}"
+        source "$lib_file"
     done < <(find "$CONVERTERS_DIR" -type f -name "*.sh" -print0 | sort -z)
 }
 
