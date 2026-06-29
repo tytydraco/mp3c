@@ -10,6 +10,8 @@ function convert_image_uid0005() {
     local convert_args=(
         -interlace none
         -auto-orient
+        -colorspace sRGB
+        -strip
         -resize "$size^"
         -gravity center
         -extent "$size"
