@@ -11,7 +11,9 @@ function convert_audio_mp3() {
     local ffmpeg_args=(
         -n
         -f mp3
-        -q:a 2
+        -ar:a 16000
+        -ac:a 1
+        -q:a 8
     )
 
     ffmpeg \

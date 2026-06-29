@@ -2,7 +2,6 @@
 
 PRESERVE_ORIGINAL="true"
 CONVERTERS_AUDIO=(
-    "convert_audio_adts_aac"
     "convert_audio_mp3"
 )
 CONVERTERS_IMAGE=(
