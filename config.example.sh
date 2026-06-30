@@ -21,6 +21,7 @@ CONVERTERS_IMAGE=(
     "convert_image_uid0016"
     "convert_image_uid0017"
     "convert_image_uid0018"
+    "convert_image_uid0019"
 )
 CONVERTERS_TEXT=(
     "convert_text_txt"
@@ -42,6 +43,7 @@ CONVERTERS_VIDEO=(
     "convert_video_uid0016"
     "convert_video_uid0017"
     "convert_video_uid0018"
+    "convert_video_uid0019"
 )
 
 export PRESERVE_ORIGINAL
