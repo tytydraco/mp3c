@@ -39,7 +39,7 @@ function convert_video_uid0014() {
         -n
         -f avi
         -c:v libx264
-        -x264-params "mvrange=16:merange=16:aq-mode=3"
+        -x264-params "mvrange=16:merange=16:aq-mode=3:mbtree=0"
         -profile:v baseline
         -filter:v
         "
@@ -50,7 +50,7 @@ function convert_video_uid0014() {
         -bsf:v "filter_units=remove_types=6"
         -pix_fmt:v yuvj420p
         -r:v "$fps"
-        -g:v 4
+        -g:v 6
         -qmin:v 20
         -sc_threshold 0
         -c:a pcm_s16le
