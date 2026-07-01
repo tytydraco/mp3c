@@ -39,7 +39,7 @@ function convert_video_uid0002() {
         -n
         -f avi
         -c:v libx264
-        -x264-params "mvrange=16:merange=16:aq-mode=3:mbtree=0"
+        -x264-params "mvrange=16:merange=16:aq-mode=3:mbtree=0:max-frame-size=85000"
         -profile:v baseline
         -filter:v
         "
@@ -48,11 +48,12 @@ function convert_video_uid0002() {
             crop=$size
         "
         -bsf:v "filter_units=remove_types=6"
+        -maxrate 10M
+        -bufsize 3M
         -pix_fmt:v yuvj420p
         -r:v "$fps"
         -crf:v 29
         -g:v 6
-        -qmin:v 20
         -sc_threshold 0
         -c:a pcm_s16le
         -ac:a 1
