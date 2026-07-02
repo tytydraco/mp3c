@@ -57,6 +57,7 @@ function convert_video_uid0014() {
         -sc_threshold 0
         -c:a pcm_s16le
         -ac:a 1
+        -ar:a 16000
     )
 
     local ffmpeg_map_args=()
@@ -64,7 +65,6 @@ function convert_video_uid0014() {
         ffmpeg_map_args=(
             -map 0:v:0
             -map 0:a:0
-            -ar:a 16000
         )
     else
         ffmpeg_map_args=(
@@ -72,7 +72,6 @@ function convert_video_uid0014() {
             -i "anullsrc=channel_layout=mono:sample_rate=16000"
             -map 0:v:0
             -map 1:a
-            -ar:a 16000
             -shortest
         )
     fi
