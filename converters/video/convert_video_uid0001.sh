@@ -50,6 +50,7 @@ function convert_video_uid0001() {
         -bsf:v "filter_units=remove_types=6"
         -maxrate 10M
         -bufsize 3M
+        -qmin:v 6
         -pix_fmt:v yuvj420p
         -r:v "$fps"
         -crf:v 29
