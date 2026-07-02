@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 function convert_text_txt() {
-    [[ -z "${1:-}" ]] && return 1
+    [[ -z "$1" ]] && return 1
 
     local input_file="$1"
-    local output_file="${input_file%.*}.txt"
+    local output_file="${2:-"${input_file%.*}.txt"}"
 
     [[ "$input_file" == "$output_file" ]] && return 0
 

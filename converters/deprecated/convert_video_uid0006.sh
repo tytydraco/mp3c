@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 function convert_video_uid0006() {
-    [[ -z "${1:-}" ]] && return 1
+    [[ -z "$1" ]] && return 1
 
     local input_file="$1"
-    local output_file="${input_file%.*}.uid0006.mp4"
+    local output_file="${2:-"${input_file%.*}.uid0006.mp4"}"
 
     function fps_ceil() {
         local fps_max="30"

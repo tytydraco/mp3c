@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 function convert_audio_mp3() {
-    [[ -z "${1:-}" ]] && return 1
+    [[ -z "$1" ]] && return 1
 
     local input_file="$1"
-    local output_file="${input_file%.*}.mp3"
+    local output_file="${2:-"${input_file%.*}.mp3"}"
 
     [[ "$input_file" == "$output_file" ]] && return 0
 

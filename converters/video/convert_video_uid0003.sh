@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 function convert_video_uid0003() {
-    [[ -z "${1:-}" ]] && return 1
+    [[ -z "$1" ]] && return 1
 
     local input_file="$1"
-    local output_file="${input_file%.*}.uid0003.avi"
+    local output_file="${2:-"${input_file%.*}.uid0003.avi"}"
 
     function has_audio() {
         ffprobe \

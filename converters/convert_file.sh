@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function convert_file() {
-    [[ -z "${1:-}" ]] && return 1
+    [[ -z "$1" ]] && return 1
 
     # Source the config since the call will be through a subshell.
     # shellcheck disable=SC1090
