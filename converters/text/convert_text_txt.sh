@@ -12,3 +12,5 @@ function convert_text_txt() {
 }
 
 export -f convert_text_txt
+
+[[ "${BASH_SOURCE[0]}" == "$0" ]] && convert_text_txt "$@"

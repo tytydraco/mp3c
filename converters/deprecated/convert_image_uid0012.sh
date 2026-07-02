@@ -20,3 +20,5 @@ function convert_image_uid0012() {
 }
 
 export -f convert_image_uid0012
+
+[[ "${BASH_SOURCE[0]}" == "$0" ]] && convert_image_uid0012 "$@"

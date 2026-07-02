@@ -53,3 +53,5 @@ function convert_video_uid0017() {
 }
 
 export -f convert_video_uid0017
+
+[[ "${BASH_SOURCE[0]}" == "$0" ]] && convert_video_uid0017 "$@"

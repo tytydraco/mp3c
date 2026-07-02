@@ -23,3 +23,5 @@ function convert_audio_mp3() {
 }
 
 export -f convert_audio_mp3
+
+[[ "${BASH_SOURCE[0]}" == "$0" ]] && convert_audio_mp3 "$@"
