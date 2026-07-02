@@ -53,7 +53,6 @@ function convert_video_uid0014() {
         -pix_fmt:v yuvj420p
         -r:v "$fps"
         -g:v 6
-        -sc_threshold 0
         -c:a pcm_s16le
         -ac:a 1
         -ar:a 16000

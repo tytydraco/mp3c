@@ -54,7 +54,6 @@ function convert_video_uid0002() {
         -r:v "$fps"
         -crf:v 29
         -g:v 6
-        -sc_threshold 0
         -c:a pcm_s16le
         -ac:a 1
         -ar:a 16000
