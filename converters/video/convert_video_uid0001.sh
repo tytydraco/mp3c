@@ -39,7 +39,7 @@ function convert_video_uid0001() {
         -n
         -f avi
         -c:v libx264
-        -x264-params "mvrange=16:merange=16:aq-mode=1:max-frame-size=85000"
+        -x264-params "mvrange=16:merange=16:max-frame-size=85000"
         -profile:v baseline
         -filter:v
         "
