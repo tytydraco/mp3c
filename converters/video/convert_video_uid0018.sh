@@ -42,7 +42,7 @@ function convert_video_uid0018() {
         -q:v 6
         -r:v "$fps"
         -c:a aac
-        -ar:a 16000
+        -ar:a 8000
         -ac:a 1
     )
 
