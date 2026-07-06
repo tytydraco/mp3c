@@ -40,7 +40,7 @@ function convert_video_uid0016() {
             crop=$size
         "
         -pix_fmt:v yuv420p
-        -crf:v 32
+        -crf:v 29
         -r:v "$fps"
         -c:a aac
         -ar:a 16000
