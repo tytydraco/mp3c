@@ -33,7 +33,6 @@ function convert_video_uid0016() {
         -map 0:v:0
         -map 0:a:0?
         -c:v libx264
-        -x264-params "aq-mode=3"
         -filter:v
         "
             transpose=cclock:passthrough=landscape,
