@@ -12,7 +12,8 @@ RUN apt-get install -y --no-install-recommends \
     ffmpeg \
     wine \
     wine64 \
-    winbind
+    winbind \
+    git
 
 COPY . /app
 WORKDIR /app
