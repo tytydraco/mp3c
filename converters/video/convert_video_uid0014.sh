@@ -52,6 +52,7 @@ function convert_video_uid0014() {
         -bufsize 3M
         -pix_fmt:v yuvj420p
         -r:v "$fps"
+        -qmin:v 10
         -g:v 6
         -c:a pcm_s16le
         -ac:a 1
