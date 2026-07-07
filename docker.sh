@@ -11,13 +11,15 @@ case "$1" in
         ;;
     run)
         docker run \
+            --rm \
+            --user "$(id -u):$(id -g)" \
+            -e HOME="$HOME" \
             --name mp3c \
             --interactive \
             --tty \
-            --volume "$SCRIPT_DIR/config.sh:/app/config.sh:ro" \
-            --volume "$SCRIPT_DIR/working/:/app/working/:rw" \
+            --volume "$HOME:$HOME:ro" \
+            --volume "$SCRIPT_DIR:/app" \
             mp3c:latest
-        docker rm -f mp3c
         ;;
     clean)
         docker image rm mp3c:latest
