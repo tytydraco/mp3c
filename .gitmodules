@@ -1,3 +1,0 @@
-[submodule "tools/ffmpeg/ffmpeg-yp3-patch"]
-	path = tools/ffmpeg/ffmpeg-yp3-patch
-	url = https://github.com/tytydraco/ffmpeg-yp3-patch
