@@ -48,7 +48,7 @@ function convert_video_uid0002() {
             crop=$size
         "
         -bsf:v "filter_units=remove_types=6"
-        -sws_flags accurate_rnd
+        -sws_flags "accurate_rnd+full_chroma_int+full_chroma_inp"
         -maxrate 10M
         -bufsize 3M
         -pix_fmt:v yuvj420p

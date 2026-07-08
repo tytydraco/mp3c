@@ -39,7 +39,7 @@ function convert_video_uid0016() {
             scale=$size:force_original_aspect_ratio=increase:out_range=tv,
             crop=$size
         "
-        -sws_flags accurate_rnd
+        -sws_flags "accurate_rnd+full_chroma_int+full_chroma_inp"
         -pix_fmt:v yuv420p
         -crf:v 29
         -r:v "$fps"

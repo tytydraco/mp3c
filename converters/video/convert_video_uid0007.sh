@@ -46,7 +46,7 @@ function convert_video_uid0007() {
             crop=$size,
             vflip
         "
-        -sws_flags accurate_rnd
+        -sws_flags "accurate_rnd+full_chroma_int+full_chroma_inp"
         -pix_fmt:v yuvj420p
         -r:v "$fps"
         -q:v 6
