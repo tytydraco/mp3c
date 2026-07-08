@@ -2,7 +2,7 @@
 # shellcheck disable=SC1090
 # shellcheck disable=SC1091
 
-SCRIPT_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
+SCRIPT_DIR="$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]}")")"
 WORKING_DIR="$SCRIPT_DIR/working"
 CONVERTERS_DIR="$SCRIPT_DIR/converters"
 CONFIG_FILE="$SCRIPT_DIR/config.sh"
