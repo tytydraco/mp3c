@@ -36,9 +36,10 @@ function convert_video_uid0016() {
         -filter:v
         "
             transpose=cclock:passthrough=landscape,
-            scale=$size:force_original_aspect_ratio=increase:in_range=auto:out_range=tv,
+            scale=$size:force_original_aspect_ratio=increase:out_range=tv,
             crop=$size
         "
+        -sws_flags accurate_rnd
         -pix_fmt:v yuv420p
         -crf:v 29
         -r:v "$fps"

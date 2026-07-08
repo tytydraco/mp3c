@@ -46,6 +46,7 @@ function convert_video_uid0013() {
             crop=$size,
             hflip
         "
+        -sws_flags accurate_rnd
         -pix_fmt:v yuvj420p
         -r:v "$fps"
         -q:v 6
