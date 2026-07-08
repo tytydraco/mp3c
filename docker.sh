@@ -7,7 +7,7 @@ case "$1" in
         docker build \
             --no-cache \
             --tag mp3c:latest \
-            .
+            "$SCRIPT_DIR"
         ;;
     run)
         docker run \
