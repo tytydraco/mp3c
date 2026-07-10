@@ -39,7 +39,7 @@ function convert_video_uid0002() {
         -n
         -f avi
         -c:v libx264
-        -x264-params "mvrange=16:merange=16:mbtree=0:max-frame-size=85000"
+        -x264-params "mbtree=0"
         -profile:v baseline
         -filter:v
         "
@@ -47,7 +47,6 @@ function convert_video_uid0002() {
             scale=$size:force_original_aspect_ratio=increase,
             crop=$size
         "
-        -bsf:v "filter_units=remove_types=6"
         -sws_flags "accurate_rnd+full_chroma_int+full_chroma_inp"
         -maxrate 10M
         -bufsize 3M
