@@ -39,7 +39,7 @@ function convert_video_uid0014() {
         -n
         -f avi
         -c:v libx264
-        -x264-params "mbtree=0"
+        -x264-params "mbtree=0:rc-lookahead=0"
         -profile:v baseline
         -filter:v
         "
@@ -54,6 +54,8 @@ function convert_video_uid0014() {
         -r:v "$fps"
         -qmin:v 10
         -g:v 6
+        -sc_threshold:v 0
+        -refs:v 1
         -c:a pcm_s16le
         -ac:a 1
         -ar:a 16000
