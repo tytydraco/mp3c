@@ -39,7 +39,7 @@ function convert_video_uid0001() {
         -n
         -f avi
         -c:v libx264
-        -x264-params "mbtree=0:rc-lookahead=0:aq-mode=0:me=tesa:subme=11"
+        -x264-params "mbtree=0:rc-lookahead=0:aq-mode=0:me=tesa:subme=11:qcomp=0.8"
         -profile:v baseline
         -filter:v
         "
@@ -52,7 +52,7 @@ function convert_video_uid0001() {
         -bufsize 3M
         -pix_fmt:v yuvj420p
         -r:v "$fps"
-        -crf:v 29
+        -crf:v 32
         -qmin:v 10
         -g:v 6
         -sc_threshold:v 0
