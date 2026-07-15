@@ -42,7 +42,7 @@ function convert_video_uid0003() {
         -filter:v
         "
             transpose=cclock:passthrough=portrait,
-            scale=$size:force_original_aspect_ratio=increase,
+            scale=$size:force_original_aspect_ratio=increase:flags=area,
             crop=$size,
             vflip
         "

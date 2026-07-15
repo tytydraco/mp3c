@@ -53,7 +53,7 @@ function convert_video_uid0005() {
         -c:v amv
         -filter:v
         "
-            scale=$size:force_original_aspect_ratio=increase,
+            scale=$size:force_original_aspect_ratio=increase:flags=area,
             crop=$size
         "
         -r:v "$fps"

@@ -54,7 +54,7 @@ function convert_video_uid0010() {
         -filter:v
         "
             transpose=cclock:passthrough=landscape,
-            scale=$size:force_original_aspect_ratio=increase,
+            scale=$size:force_original_aspect_ratio=increase:flags=area,
             crop=$size
         "
         -r:v "$fps"

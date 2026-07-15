@@ -35,7 +35,7 @@ function convert_video_uid0017() {
         -filter:v
         "
             transpose=cclock:passthrough=landscape,
-            scale=$size:force_original_aspect_ratio=increase:out_range=tv,
+            scale=$size:force_original_aspect_ratio=increase:flags=area:out_range=tv,
             crop=$size
         "
         -sws_flags "accurate_rnd+full_chroma_int+full_chroma_inp"
