@@ -44,7 +44,7 @@ function convert_video_uid0001() {
         -filter:v
         "
             transpose=cclock:passthrough=portrait,
-            scale=$size:force_original_aspect_ratio=increase,
+            scale=$size:force_original_aspect_ratio=increase:flags=area,
             crop=$size
         "
         -sws_flags "accurate_rnd+full_chroma_int+full_chroma_inp"
@@ -52,7 +52,7 @@ function convert_video_uid0001() {
         -bufsize 3M
         -pix_fmt:v yuvj420p
         -r:v "$fps"
-        -crf:v 32
+        -crf:v 35
         -qmin:v 10
         -g:v 6
         -sc_threshold:v 0
