@@ -39,7 +39,7 @@ function convert_video_uid0002() {
         -n
         -f avi
         -c:v libx264
-        -x264-params "mbtree=0:rc-lookahead=0:aq-mode=2:ipratio=2:psy=0:me=tesa:subme=11:qcomp=1"
+        -x264-params "mbtree=0:rc-lookahead=0:aq-mode=2:ipratio=2:psy=0:me=tesa:subme=11"
         -profile:v baseline
         -filter:v
         "
