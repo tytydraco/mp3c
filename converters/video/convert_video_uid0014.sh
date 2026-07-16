@@ -39,7 +39,7 @@ function convert_video_uid0014() {
         -n
         -f avi
         -c:v libx264
-        -x264-params "mbtree=0:rc-lookahead=0:aq-mode=2:ipratio=2:psy=0:me=tesa:subme=11:trellis=2:weightp=2:qcomp=1"
+        -x264-params "ipratio=2:psy=0:me=tesa:subme=11:trellis=2:weightp=2"
         -profile:v baseline
         -filter:v
         "
@@ -48,12 +48,9 @@ function convert_video_uid0014() {
             crop=$size
         "
         -sws_flags "accurate_rnd+full_chroma_int+full_chroma_inp"
-        -maxrate 10M
-        -bufsize 3M
         -pix_fmt:v yuvj420p
         -r:v "$fps"
-        -crf:v 29
-        -qmin:v 10
+        -qp:v 29
         -g:v 6
         -sc_threshold:v 0
         -refs:v 1
