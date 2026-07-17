@@ -11,6 +11,8 @@ FFMPEG_YP3_DIR="$SCRIPT_DIR/tools/ffmpeg/yp3_patch"
 FFMPEG_YP3="$FFMPEG_YP3_DIR/ffmpeg-amd64" # Or: WINEDEBUG=-all wine "$SCRIPT_DIR/tools/ffmpeg/vendor/ffmpeg-mod-shenju.exe"
 [[ "$(uname -m)" == "aarch64" || "$(uname -m)" == "arm64" ]] && FFMPEG_YP3="$FFMPEG_YP3_DIR/ffmpeg-arm64"
 
+#FFMPEG_YP3="/home/tytydraco/Projects/ffmpeg-yp3-patch/local/bin/ffmpeg"
+
 function source_converters() {
     while IFS= read -r -d '' lib_file; do
         source "$lib_file"
@@ -33,6 +35,31 @@ function pull_yp3_binaries() {
     done
 }
 
+function convert_all() {
+    local dir
+    local array_name
+    local files
+
+    for mode in audio image text video; do
+        array_name="CONVERTERS_${mode^^}[@]"
+
+        [[ -z "${!array_name}" ]] && continue
+
+        dir="$WORKING_DIR/$mode"
+        [[ ! -d "$dir" ]] && continue
+
+        mapfile -d '' files < <(find "$dir" -type f -print0)
+        [[ "${#files[@]}" -eq 0 ]] && continue
+
+        for input_file in "${files[@]}"; do
+            for converter in "${!array_name}"; do
+                echo "$array_name $dir $input_file $converter"
+                eval "$converter" "$(printf '%q' "$input_file")"
+            done
+        done
+    done
+}
+
 function main() {
     if [[ ! -f "$CONFIG_FILE" ]]; then
         echo "No config.sh file found."
@@ -44,10 +71,7 @@ function main() {
     source "$CONFIG_FILE"
     source_converters
 
-    for mode in audio image text video; do
-        find -L "$WORKING_DIR/$mode" -type f \
-            -exec bash -c 'convert_file "$1" "$2"' _ "$mode" "{}" \;
-    done
+    convert_all
 }
 
 export SCRIPT_DIR
