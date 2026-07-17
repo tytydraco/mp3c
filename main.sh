@@ -59,7 +59,6 @@ function convert_all() {
 
         for input_file in "${files[@]}"; do
             for converter in "${!array_name}"; do
-                echo "$array_name $dir $input_file $converter"
                 eval "$converter" "$(printf '%q' "$input_file")"
             done
         done
