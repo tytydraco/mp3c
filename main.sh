@@ -61,6 +61,8 @@ function convert_all() {
             for converter in "${!array_name}"; do
                 "$converter" "$input_file"
             done
+
+	    [[ "$PRESERVE_ORIGINAL" == "false" ]] && rm "$input_file"
         done
     done
 }
