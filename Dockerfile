@@ -10,6 +10,7 @@ RUN apt-get install -y --no-install-recommends \
     imagemagick \
     calibre \
     ffmpeg \
+    gpac \
     wine \
     wine64 \
     winbind \

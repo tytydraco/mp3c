@@ -43,7 +43,7 @@ function convert_video_uid0018() {
         -q:v 6
         -r:v "$fps"
         -c:a aac
-        -ar:a 8000
+        -ar:a 16000
         -ac:a 1
     )
 
@@ -51,6 +51,8 @@ function convert_video_uid0018() {
     	-i "$input_file" \
         "${ffmpeg_args[@]}" \
         "$output_file"
+    MP4Box -add "$output_file" -new "$output_file.box"
+    mv "$output_file.box" "$output_file"
 }
 
 export -f convert_video_uid0018
