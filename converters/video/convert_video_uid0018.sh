@@ -45,15 +45,14 @@ function convert_video_uid0018() {
         -c:a aac
         -ar:a 16000
         -ac:a 1
-        -chunk_duration 500000
-        -movflags +faststart
     )
 
     ffmpeg \
     	-i "$input_file" \
         "${ffmpeg_args[@]}" \
         "$output_file"
-    MP4Box -inter 500 "$output_file"
+    MP4Box -add "$output_file" -new "$output_file.box"
+    mv "$output_file.box" "$output_file"
 }
 
 export -f convert_video_uid0018
