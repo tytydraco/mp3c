@@ -57,6 +57,7 @@ function convert_video_uid0010() {
             scale=$size:force_original_aspect_ratio=increase:flags=area,
             crop=$size
         "
+        -sws_flags "accurate_rnd+full_chroma_int+full_chroma_inp"
         -r:v "$fps"
         -block_size:a "$block_size"
     )
