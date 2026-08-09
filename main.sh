@@ -15,8 +15,6 @@ function source_converters() {
 }
 
 function pull_yp3_binaries() {
-    local name
-
     mkdir -p "$FFMPEG_YP3_DIR"
 
     function pull_arch_binary() {
