@@ -52,18 +52,12 @@ function convert_video_uid0018() {
         "${ffmpeg_args[@]}" \
         "$output_file"
     MP4Box \
+        -add "$output_file" \
+        -new \
         -inter 1 \
         -tmp "$(dirname -- "$output_file")" \
-        "$output_file"
-
-    # Split files > 2G to obey firmware limit.
-    if (( $(stat -c%s "$output_file") > 2147483648 )); then
-        MP4Box \
-            -split-size 2G \
-            -tmp "$(dirname -- "$output_file")" \
-            "$output_file"
-        rm "$output_file"        
-    fi
+        "$output_file.box"
+    mv "$output_file.box" "$output_file"
 }
 
 export -f convert_video_uid0018
