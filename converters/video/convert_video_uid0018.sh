@@ -51,7 +51,12 @@ function convert_video_uid0018() {
     	-i "$input_file" \
         "${ffmpeg_args[@]}" \
         "$output_file"
-    MP4Box -add "$output_file" -new -inter 1 "$output_file.box"
+    MP4Box \
+        -add "$output_file" \
+        -new \
+        -inter 1 \
+        -tmp "$(dirname -- "$output_file")" \
+        "$output_file.box"
     mv "$output_file.box" "$output_file"
 }
 
