@@ -18,7 +18,6 @@ function convert_image_uid0005() {
     )
 
     convert \
-        -n \
         "$input_file" \
         "${convert_args[@]}" \
         "$output_file"
