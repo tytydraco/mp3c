@@ -36,7 +36,6 @@ function convert_video_uid0007() {
 
     local size="128:160"
     local ffmpeg_args=(
-        -n
         -f avi
         -c:v mjpeg
         -filter:v
@@ -73,6 +72,8 @@ function convert_video_uid0007() {
     fi
 
     ffmpeg \
+        -nostdin \
+        -n \
         -i "$input_file" \
         "${ffmpeg_map_args[@]}" \
         "${ffmpeg_args[@]}" \

@@ -36,7 +36,6 @@ function convert_video_uid0014() {
 
     local size="128:160"
     local ffmpeg_args=(
-        -n
         -f avi
         -c:v libx264
         -x264-params "ipratio=2:psy=0:me=tesa:subme=11:trellis=2"
@@ -76,6 +75,8 @@ function convert_video_uid0014() {
     fi
 
     "$FFMPEG_YP3" \
+        -nostdin \
+        -n \
     	-i "$input_file" \
         "${ffmpeg_map_args[@]}" \
         "${ffmpeg_args[@]}" \

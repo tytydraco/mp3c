@@ -48,7 +48,6 @@ function convert_video_uid0005() {
 
     local size="128:128"
     local ffmpeg_args=(
-        -n
         -f amv
         -c:v amv
         -filter:v
@@ -78,6 +77,8 @@ function convert_video_uid0005() {
     fi
 
     ffmpeg \
+        -nostdin \
+        -n \
         -i "$input_file" \
         "${ffmpeg_map_args[@]}" \
         "${ffmpeg_args[@]}" \

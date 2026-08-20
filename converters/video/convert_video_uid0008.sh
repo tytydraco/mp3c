@@ -27,7 +27,6 @@ function convert_video_uid0008() {
 
     local size="640:480"
     local ffmpeg_args=(
-        -n
         -f mp4
         -map 0:v:0
         -map 0:a:0?
@@ -48,6 +47,8 @@ function convert_video_uid0008() {
     )
 
     ffmpeg \
+        -nostdin \
+        -n \
         -i "$input_file" \
         "${ffmpeg_args[@]}" \
         "$output_file"
