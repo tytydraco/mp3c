@@ -9,7 +9,6 @@ function convert_audio_mp3() {
     [[ "$input_file" == "$output_file" ]] && return 0
 
     local ffmpeg_args=(
-        -n
         -f mp3
         -ar:a 16000
         -ac:a 1
@@ -17,6 +16,8 @@ function convert_audio_mp3() {
     )
 
     ffmpeg \
+        -nostdin \
+        -n \
         -i "$input_file" \
         "${ffmpeg_args[@]}" \
         "$output_file"
