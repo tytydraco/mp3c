@@ -37,9 +37,11 @@ changes. The working folder is shared with the docker container.
 - `./docker.sh run`: Executes `main.sh` and starts the program.
 - `./docker.sh clean`: Removes the container.
 
-# YP3 Patch
+# Related projects
 
+- [Mp3cd - mp3c implementation written in dart](https://github.com/tytydraco/mp3cd)
 - [Patched x264 FFMPEG for YP3 chips](https://github.com/tytydraco/ffmpeg-yp3-patch)
+- [Patched x264 encoder for YP3 chips](https://github.com/tytydraco/x264-yp3-patch)
 - [Open source encoder/muxer for ATJ AVI MJPEG chips](https://github.com/tytydraco/atj-avi-encoder)
 
 # Credit
