@@ -48,7 +48,7 @@ function convert_video_uid0013() {
         -sws_flags "accurate_rnd+full_chroma_int+full_chroma_inp"
         -pix_fmt:v yuvj420p
         -r:v "$fps"
-        -q:v 6
+        -q:v 4
         -c:a pcm_s16le
         -ac:a 2
     )
