@@ -30,7 +30,7 @@ function convert_video_uid0018() {
         -f mp4
         -map 0:v:0
         -map 0:a:0?
-        -c:v libxvid
+        -c:v mpeg4
         -filter:v
         "
             transpose=cclock:passthrough=landscape,
@@ -51,8 +51,18 @@ function convert_video_uid0018() {
     ffmpeg \
         -nostdin \
         -n \
-    	-i "$input_file" \
+        -i "$input_file" \
         "${ffmpeg_args[@]}" \
+        -pass 1 \
+        -an:a \
+        -f null \
+        /dev/null
+    ffmpeg \
+        -nostdin \
+        -n \
+        -i "$input_file" \
+        "${ffmpeg_args[@]}" \
+        -pass 2 \
         "$output_file"
     MP4Box \
         -inter 1 \
