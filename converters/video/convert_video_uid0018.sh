@@ -48,12 +48,15 @@ function convert_video_uid0018() {
         -ar:a 16000
     )
 
+    local passlog_dir="$(mktemp -d)"
+    local passlog="$passlog_dir/log"
     ffmpeg \
         -nostdin \
         -n \
         -i "$input_file" \
         "${ffmpeg_args[@]}" \
         -pass 1 \
+        -passlogfile "$passlog" \
         -an:a \
         -f null \
         /dev/null
@@ -63,7 +66,9 @@ function convert_video_uid0018() {
         -i "$input_file" \
         "${ffmpeg_args[@]}" \
         -pass 2 \
+        -passlogfile "$passlog" \
         "$output_file"
+    rm -rf "$passlog_dir"
     MP4Box \
         -inter 1 \
         -tmp "$(dirname -- "$output_file")" \
