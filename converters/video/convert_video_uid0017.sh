@@ -53,16 +53,6 @@ function convert_video_uid0017() {
         -n \
     	-i "$input_file" \
         "${ffmpeg_args[@]}" \
-        -pass 1 \
-        -an:a \
-        -f null \
-        /dev/null
-    ffmpeg \
-        -nostdin \
-        -n \
-    	-i "$input_file" \
-        "${ffmpeg_args[@]}" \
-        -pass 2 \
         "$output_file"
     MP4Box \
         -inter 1 \
