@@ -57,7 +57,7 @@ function convert_video_uid0017() {
         "${ffmpeg_args[@]}" \
         -pass 1 \
         -passlogfile "$passlog" \
-        -an:a \
+        -an \
         -f null \
         /dev/null
     ffmpeg \
