@@ -48,7 +48,7 @@ function convert_video_uid0003() {
         -sws_flags "accurate_rnd+full_chroma_int+full_chroma_inp"
         -pix_fmt:v yuvj420p
         -r:v "$fps"
-        -q:v 4
+        -b:v 600k
         -c:a pcm_s16le
         -ac:a 2
     )
@@ -71,13 +71,29 @@ function convert_video_uid0003() {
         )
     fi
 
+    local passlog_dir="$(mktemp -d)"
+    local passlog="$passlog_dir/log"
     ffmpeg \
         -nostdin \
         -n \
         -i "$input_file" \
         "${ffmpeg_map_args[@]}" \
         "${ffmpeg_args[@]}" \
+        -pass 1 \
+        -passlogfile "$passlog" \
+        -an \
+        -f null \
+        /dev/null
+    ffmpeg \
+        -nostdin \
+        -n \
+        -i "$input_file" \
+        "${ffmpeg_map_args[@]}" \
+        "${ffmpeg_args[@]}" \
+        -pass 2 \
+        -passlogfile "$passlog" \
         "$output_file"
+    rm -rf "$passlog_dir"
 }
 
 export -f convert_video_uid0003
