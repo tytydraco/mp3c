@@ -31,6 +31,7 @@ function convert_video_uid0018() {
         -map 0:v:0
         -map 0:a:0?
         -c:v mpeg4
+        -mpv_flags +strict_gop
         -filter:v
         "
             transpose=cclock:passthrough=landscape,
