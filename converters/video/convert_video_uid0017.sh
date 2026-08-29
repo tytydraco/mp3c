@@ -31,7 +31,6 @@ function convert_video_uid0017() {
         -map 0:v:0
         -map 0:a:0?
         -c:v mpeg4
-        -mpv_flags +strict_gop
         -filter:v
         "
             transpose=cclock:passthrough=landscape,
@@ -41,8 +40,8 @@ function convert_video_uid0017() {
         -sws_flags "accurate_rnd+full_chroma_int+full_chroma_inp"
         -pix_fmt:v yuv420p
         -b:v 200k
-        -maxrate:v 1M
-        -bufsize:v 1M
+        -maxrate:v 2M
+        -bufsize:v 200k
         -r:v "$fps"
         -c:a aac
         -ac:a 1
