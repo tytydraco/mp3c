@@ -31,8 +31,18 @@ function convert_video_uid0014() {
             'BEGIN { if (fps > max) print max; else print fps }'
     }
 
+    function temporal_gop() {
+        local fps="$1"
+        local seconds="$2"
+        awk -v fps="$fps" -v seconds="$seconds" \
+            'BEGIN { r = int( ( seconds * fps + 0.5 )); print ( r < 1 ? 1 : r ) }'
+    }
+
     local fps
     fps="$(fps_ceil "$input_file")"
+
+    local gop
+    gop="$(temporal_gop "$fps" 0.25)"
 
     local size="128:160"
     local ffmpeg_args=(
@@ -50,7 +60,7 @@ function convert_video_uid0014() {
         -pix_fmt:v yuvj420p
         -r:v "$fps"
         -qp:v 32
-        -g:v 6
+        -g:v "$gop"
         -sc_threshold:v 0
         -refs:v 1
         -c:a pcm_s16le
