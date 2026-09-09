@@ -1,28 +1,30 @@
 #!/usr/bin/env bash
 
-function convert_image_uid0002() {
-    [[ -z "$1" ]] && return 1
+convert_image_uid0002() {
+	[[ -n "${1:-}" ]] || return 1
 
-    local input_file="$1"
-    local output_file="${2:-"${input_file%.*}.uid0002.jpg"}"
+	local -r input_file="$1"
+	local -r output_file="${2:-${input_file%.*}.uid0002.jpg}"
 
-    local size="240x240"
-    local convert_args=(
-        -interlace none
-        -auto-orient
-        -colorspace sRGB
-        -strip
-        -resize "$size^"
-        -gravity center
-        -extent "$size"
-    )
+	local -r size='240x240'
+	local -r magick_args=(
+		-interlace none
+		-auto-orient
+		-colorspace sRGB
+		-strip
+		-resize "$size^"
+		-gravity center
+		-extent "$size"
+	)
 
-    convert \
-        "$input_file" \
-        "${convert_args[@]}" \
-        "$output_file"
+	magick \
+		"$input_file" \
+		"${magick_args[@]}" \
+		"$output_file"
 }
 
 export -f convert_image_uid0002
 
-[[ "${BASH_SOURCE[0]}" == "$0" ]] && convert_image_uid0002 "$@"
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
+	convert_image_uid0002 "$@"
+fi

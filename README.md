@@ -21,20 +21,14 @@ A limiting criteria for device selecting is necessary to prevent redundancy.
 - If rotation is needed or ambiguous, use the device's preferred rotation for the content. This can be determined by playing a video, or by viewing an image which has the opposite orientation of the device's screen. Most ATJ devices prefer counter-clockwise rotation, while most SL devices prefer clockwise rotation, but the rule is not always true, especially for landscape devices. If the device has a square screen, do not rotate. If intended rotation is entirely ambiguous (i.e., landscape fixed-size players), clockwise rotation is preferred.
 - Always ensure the content fills the entire screen (crop).
 
-# Usage
-
-1. Copy the [example config](config.example.sh) to [config.sh](config.sh).
-2. Run `./main.sh`.
-
 # Docker
 
 A `Dockerfile` is bundled for dependency management. `docker.sh` can be used to
-build the image and start the conversion process. `config.sh` will be
-bind-mounted so that the image does not need to be rebuilt when the config
-changes. The working folder is shared with the docker container.
+build the image and start the conversion process. The working folder is shared 
+with the docker container.
 
 - `./docker.sh build`: Only needs to be run once.
-- `./docker.sh run`: Executes `main.sh` and starts the program.
+- `./docker.sh run`: Enters interactive shell with dependencies installed.
 - `./docker.sh clean`: Removes the container.
 
 # Related projects
