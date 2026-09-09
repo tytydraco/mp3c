@@ -61,7 +61,7 @@ convert_video_uid0017() {
 	)
 
 	local passlog_dir
-	passlog_dir="$(mktemp -d)"
+	passlog_dir="$(mktemp -d)" || return 1
 	local -r passlog="$passlog_dir/log"
 	ffmpeg \
 		-nostdin \
