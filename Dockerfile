@@ -19,4 +19,4 @@ RUN apt-get install -y --no-install-recommends \
 COPY . /app
 WORKDIR /app
 
-ENTRYPOINT [ "bash", "main.sh" ]
+ENTRYPOINT [ "/usr/bin/env", "bash" ]
