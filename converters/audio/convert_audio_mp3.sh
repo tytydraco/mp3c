@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
 convert_audio_mp3() {
-    [[ -z "$1" ]] && return 1
+    [[ -n "${1:-}" ]] || return 1
 
-    local input_file="$1"
-    local output_file="${2:-"${input_file%.*}.mp3"}"
+    local -r input_file="$1"
+    local -r output_file="${2:-${input_file%.*}.mp3}"
 
-    [[ "$input_file" == "$output_file" ]] && return 0
+    [[ "$input_file" != "$output_file" ]] || return 1
 
-    local ffmpeg_args=(
+    local -r ffmpeg_args=(
         -f mp3
         -ar:a 16000
         -ac:a 1

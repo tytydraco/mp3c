@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 convert_image_uid0005() {
-    [[ -z "$1" ]] && return 1
+    [[ -n "${1:-}" ]] || return 1
 
-    local input_file="$1"
-    local output_file="${2:-"${input_file%.*}.uid0005.jpg"}"
+    local -r input_file="$1"
+    local -r output_file="${2:-${input_file%.*}.uid0005.jpg}"
 
-    local size="128x128"
-    local convert_args=(
+    local -r size='128x128'
+    local -r convert_args=(
         -interlace none
         -auto-orient
         -colorspace sRGB

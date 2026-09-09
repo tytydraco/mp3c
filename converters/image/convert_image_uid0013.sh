@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 
 convert_image_uid0013() {
-    [[ -z "$1" ]] && return 1
+    [[ -n "${1:-}" ]] || return 1
 
-    local input_file="$1"
-    local output_file="${2:-"${input_file%.*}.uid0013.jpg"}"
+    local -r input_file="$1"
+    local -r output_file="${2:-${input_file%.*}.uid0013.jpg}"
 
-    local size="160x128"
-    local convert_args=(
+    local -r size='160x128'
+    local -r convert_args=(
         -interlace none
         -auto-orient
         -colorspace sRGB
         -strip
-        -rotate "-90<"
+        -rotate '-90<'
         -resize "$size^"
         -gravity center
         -extent "$size"
