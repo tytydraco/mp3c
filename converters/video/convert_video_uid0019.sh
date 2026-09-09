@@ -59,10 +59,10 @@ convert_video_uid0019() {
 		-c:v amv
 		-filter:v
 		"
-            transpose=cclock:passthrough=landscape,
-            scale=$size:force_original_aspect_ratio=increase:flags=area,
-            crop=$size
-        "
+			transpose=cclock:passthrough=landscape,
+			scale=$size:force_original_aspect_ratio=increase:flags=area,
+			crop=$size
+		"
 		-sws_flags 'accurate_rnd+full_chroma_int+full_chroma_inp'
 		-r:v "$fps"
 		-block_size:a "$block_size"
@@ -97,4 +97,6 @@ export -f _has_audio
 export -f _choose_fps
 export -f convert_video_uid0019
 
-[[ "${BASH_SOURCE[0]}" == "$0" ]] && convert_video_uid0019 "$@"
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
+	convert_video_uid0019 "$@"
+fi

@@ -15,10 +15,10 @@ _has_audio() {
 
 _choose_fps() {
 	local -r fps_max=25
-    local fps_raw
+	local fps_raw
 	local fps_original
 
-    fps_raw="$(ffprobe \
+	fps_raw="$(ffprobe \
 		-v error \
 		-select_streams v:0 \
 		-show_entries stream=avg_frame_rate \
@@ -47,11 +47,11 @@ convert_video_uid0007() {
 		-c:v mjpeg
 		-filter:v
 		"
-            transpose=clock:passthrough=portrait,
-            scale=$size:force_original_aspect_ratio=increase:flags=area,
-            crop=$size,
-            vflip
-        "
+			transpose=clock:passthrough=portrait,
+			scale=$size:force_original_aspect_ratio=increase:flags=area,
+			crop=$size,
+			vflip
+		"
 		-sws_flags 'accurate_rnd+full_chroma_int+full_chroma_inp'
 		-pix_fmt:v yuvj420p
 		-r:v "$fps"
@@ -108,4 +108,6 @@ export -f _has_audio
 export -f _choose_fps
 export -f convert_video_uid0007
 
-[[ "${BASH_SOURCE[0]}" == "$0" ]] && convert_video_uid0007 "$@"
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
+	convert_video_uid0007 "$@"
+fi

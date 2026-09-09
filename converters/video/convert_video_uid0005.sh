@@ -59,9 +59,9 @@ convert_video_uid0005() {
 		-c:v amv
 		-filter:v
 		"
-            scale=$size:force_original_aspect_ratio=increase:flags=area,
-            crop=$size
-        "
+			scale=$size:force_original_aspect_ratio=increase:flags=area,
+			crop=$size
+		"
 		-sws_flags 'accurate_rnd+full_chroma_int+full_chroma_inp'
 		-r:v "$fps"
 		-block_size:a "$block_size"
@@ -96,4 +96,6 @@ export -f _has_audio
 export -f _choose_fps
 export -f convert_video_uid0005
 
-[[ "${BASH_SOURCE[0]}" == "$0" ]] && convert_video_uid0005 "$@"
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
+	convert_video_uid0005 "$@"
+fi

@@ -26,4 +26,6 @@ convert_image_uid0001() {
 
 export -f convert_image_uid0001
 
-[[ "${BASH_SOURCE[0]}" == "$0" ]] && convert_image_uid0001 "$@"
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
+	convert_image_uid0001 "$@"
+fi

@@ -2,10 +2,10 @@
 
 _choose_fps() {
 	local -r fps_max=25
-    local fps_raw
+	local fps_raw
 	local fps_original
 
-    fps_raw="$(ffprobe \
+	fps_raw="$(ffprobe \
 		-v error \
 		-select_streams v:0 \
 		-show_entries stream=avg_frame_rate \
@@ -46,10 +46,10 @@ convert_video_uid0017() {
 		-c:v mpeg4
 		-filter:v
 		"
-            transpose=cclock:passthrough=landscape,
-            scale=$size:force_original_aspect_ratio=increase:flags=area:out_range=tv,
-            crop=$size
-        "
+			transpose=cclock:passthrough=landscape,
+			scale=$size:force_original_aspect_ratio=increase:flags=area:out_range=tv,
+			crop=$size
+		"
 		-sws_flags 'accurate_rnd+full_chroma_int+full_chroma_inp'
 		-pix_fmt:v yuv420p
 		-b:v 100k
@@ -92,4 +92,6 @@ export -f _choose_fps
 export -f _temporal_gop
 export -f convert_video_uid0017
 
-[[ "${BASH_SOURCE[0]}" == "$0" ]] && convert_video_uid0017 "$@"
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
+	convert_video_uid0017 "$@"
+fi
