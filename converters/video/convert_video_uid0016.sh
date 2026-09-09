@@ -30,7 +30,7 @@ convert_video_uid0016() {
 	fps="$(_choose_fps "$input_file")" || return 1
 
 	local -r size='320:240'
-	local -r ffmpeg_args=(
+	local -ar ffmpeg_args=(
 		-f mp4
 		-map 0:v:0
 		-map '0:a:0?'

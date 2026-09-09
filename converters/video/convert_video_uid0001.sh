@@ -52,7 +52,7 @@ convert_video_uid0001() {
 	gop="$(_temporal_gop "$fps" 0.25)" || return 1
 
 	local -r size='240:288'
-	local -r ffmpeg_args=(
+	local -ar ffmpeg_args=(
 		-f avi
 		-c:v libx264
 		-x264-params 'ipratio=2:psy=0:me=tesa:subme=11:trellis=2'
@@ -75,7 +75,7 @@ convert_video_uid0001() {
 		-ar:a 16000
 	)
 
-	local ffmpeg_map_args=()
+	local -a ffmpeg_map_args=()
 	if _has_audio "$input_file"; then
 		ffmpeg_map_args=(
 			-map 0:v:0

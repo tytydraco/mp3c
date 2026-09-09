@@ -39,7 +39,7 @@ convert_video_uid0017() {
 	gop="$(_temporal_gop "$fps" 4)" || return 1
 
 	local -r size='160:128'
-	local -r ffmpeg_args=(
+	local -ar ffmpeg_args=(
 		-f mp4
 		-map 0:v:0
 		-map '0:a:0?'

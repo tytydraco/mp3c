@@ -42,7 +42,7 @@ convert_video_uid0013() {
 	fps="$(_choose_fps "$input_file")" || return 1
 
 	local -r size='160:128'
-	local -r ffmpeg_args=(
+	local -ar ffmpeg_args=(
 		-f avi
 		-c:v mjpeg
 		-filter:v
@@ -60,7 +60,7 @@ convert_video_uid0013() {
 		-ac:a 2
 	)
 
-	local ffmpeg_map_args=()
+	local -a ffmpeg_map_args=()
 	if _has_audio "$input_file"; then
 		ffmpeg_map_args=(
 			-map 0:v:0

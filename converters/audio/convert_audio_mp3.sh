@@ -8,7 +8,7 @@ convert_audio_mp3() {
 
 	[[ "$input_file" != "$output_file" ]] || return 1
 
-	local -r ffmpeg_args=(
+	local -ar ffmpeg_args=(
 		-f mp3
 		-ar:a 16000
 		-ac:a 1

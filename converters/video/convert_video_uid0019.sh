@@ -14,14 +14,17 @@ _has_audio() {
 }
 
 _choose_fps() {
-	local -a fps_allowed
+	local -a fps_allowed=()
+	local fps
 	local fps_max
 	local fps_raw
 	local fps_original
 	local fps_nearest
 
 	# Find valid FPS within [9, 25].
-	readarray -t fps_allowed < <(seq 9 25 | awk '22050 % $1 == 0 { print $1 }')
+	for fps in {9..25}; do
+		((22050 % fps == 0)) && fps_allowed+=("$fps")
+	done
 	fps_max="${fps_allowed[-1]}"
 
 	fps_raw="$(ffprobe \
@@ -54,7 +57,7 @@ convert_video_uid0019() {
 	block_size="$((22050 / fps))"
 
 	local -r size='320:240'
-	local -r ffmpeg_args=(
+	local -ar ffmpeg_args=(
 		-f amv
 		-c:v amv
 		-filter:v
@@ -68,7 +71,7 @@ convert_video_uid0019() {
 		-block_size:a "$block_size"
 	)
 
-	local ffmpeg_map_args=()
+	local -a ffmpeg_map_args=()
 	if _has_audio "$input_file"; then
 		ffmpeg_map_args=(
 			-map 0:v:0
