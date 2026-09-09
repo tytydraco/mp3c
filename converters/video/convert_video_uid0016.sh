@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 # EDGE CASE: Player is unable to begin playback for files <25KB.
-function convert_video_uid0016() {
+convert_video_uid0016() {
     [[ -z "$1" ]] && return 1
 
     local input_file="$1"
     local output_file="${2:-"${input_file%.*}.uid0016.mp4"}"
 
-    function fps_ceil() {
+    fps_ceil() {
         local fps_max="25"
         local fps_original
 

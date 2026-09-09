@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-function convert_video_uid0017() {
+convert_video_uid0017() {
     [[ -z "$1" ]] && return 1
 
     local input_file="$1"
     local output_file="${2:-"${input_file%.*}.uid0017.mp4"}"
 
-    function fps_ceil() {
+    fps_ceil() {
         local fps_max="25"
         local fps_original
 
@@ -22,7 +22,7 @@ function convert_video_uid0017() {
             'BEGIN { if (fps > max) print max; else print fps }'
     }
 
-    function temporal_gop() {
+    temporal_gop() {
         local fps="$1"
         local seconds="$2"
         awk -v fps="$fps" -v seconds="$seconds" \

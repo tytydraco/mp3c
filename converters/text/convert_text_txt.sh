@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-function convert_text_txt() {
+convert_text_txt() {
     [[ -z "$1" ]] && return 1
 
     local input_file="$1"

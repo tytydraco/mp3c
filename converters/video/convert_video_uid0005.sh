@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-function convert_video_uid0005() {
+convert_video_uid0005() {
     [[ -z "$1" ]] && return 1
 
     local input_file="$1"
     local output_file="${2:-"${input_file%.*}.uid0005.amv"}"
 
-    function has_audio() {
+    has_audio() {
         ffprobe \
             -v error \
             -select_streams a:0 \
@@ -15,7 +15,7 @@ function convert_video_uid0005() {
             "$1" | grep -q .
     }
 
-    function fps_ceil() {
+    fps_ceil() {
         local -a fps_allowed
         local fps_max
         local fps_original

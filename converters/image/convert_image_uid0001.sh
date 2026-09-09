@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-function convert_image_uid0001() {
+convert_image_uid0001() {
     [[ -z "$1" ]] && return 1
 
     local input_file="$1"
