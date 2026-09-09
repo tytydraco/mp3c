@@ -7,7 +7,7 @@ convert_image_uid0011() {
     local -r output_file="${2:-${input_file%.*}.uid0011.jpg}"
 
     local -r size='160x128'
-    local -r convert_args=(
+    local -r magick_args=(
         -interlace none
         -auto-orient
         -colorspace sRGB
@@ -18,9 +18,9 @@ convert_image_uid0011() {
         -extent "$size"
     )
 
-    convert \
+    magick \
         "$input_file" \
-        "${convert_args[@]}" \
+        "${magick_args[@]}" \
         "$output_file"
 }
 

@@ -13,7 +13,7 @@ _has_audio() {
 	[[ -n "$output" ]]
 }
 
-_fps_ceil() {
+_choose_fps() {
 	local -r fps_max=25
     local fps_raw
 	local fps_original
@@ -39,7 +39,7 @@ convert_video_uid0013() {
 	local -r output_file="${2:-${input_file%.*}.uid0013.avi}"
 
 	local fps
-	fps="$(_fps_ceil "$input_file")" || return 1
+	fps="$(_choose_fps "$input_file")" || return 1
 
 	local -r size='160:128'
 	local -r ffmpeg_args=(
@@ -105,7 +105,7 @@ convert_video_uid0013() {
 }
 
 export -f _has_audio
-export -f _fps_ceil
+export -f _choose_fps
 export -f convert_video_uid0013
 
 [[ "${BASH_SOURCE[0]}" == "$0" ]] && convert_video_uid0013 "$@"

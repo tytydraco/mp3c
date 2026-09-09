@@ -13,7 +13,7 @@ _has_audio() {
 	[[ -n "$output" ]]
 }
 
-_fps_ceil() {
+_choose_fps() {
 	local -a fps_allowed
 	local fps_max
 	local fps_raw
@@ -50,7 +50,7 @@ convert_video_uid0019() {
 	local fps
 	local block_size
 
-	fps="$(_fps_ceil "$input_file")" || return 1
+	fps="$(_choose_fps "$input_file")" || return 1
 	block_size="$((22050 / fps))"
 
 	local -r size='320:240'
@@ -94,7 +94,7 @@ convert_video_uid0019() {
 }
 
 export -f _has_audio
-export -f _fps_ceil
+export -f _choose_fps
 export -f convert_video_uid0019
 
 [[ "${BASH_SOURCE[0]}" == "$0" ]] && convert_video_uid0019 "$@"

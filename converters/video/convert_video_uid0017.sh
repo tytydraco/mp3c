@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-_fps_ceil() {
+_choose_fps() {
 	local -r fps_max=25
     local fps_raw
 	local fps_original
@@ -33,7 +33,7 @@ convert_video_uid0017() {
 	local -r output_file="${2:-${input_file%.*}.uid0017.mp4}"
 
 	local fps
-	fps="$(_fps_ceil "$input_file")" || return 1
+	fps="$(_choose_fps "$input_file")" || return 1
 
 	local gop
 	gop="$(_temporal_gop "$fps" 4)" || return 1
@@ -88,7 +88,7 @@ convert_video_uid0017() {
 		"$output_file"
 }
 
-export -f _fps_ceil
+export -f _choose_fps
 export -f _temporal_gop
 export -f convert_video_uid0017
 
