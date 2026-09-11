@@ -55,7 +55,7 @@ convert_video_uid0014() {
 	local -ar ffmpeg_args=(
 		-f avi
 		-c:v libx264
-		-x264-params 'ipratio=2:psy=0:me=tesa:subme=11:trellis=2'
+		-x264-params 'ipratio=2:me=tesa'
 		-profile:v baseline
 		-filter:v
 		"
